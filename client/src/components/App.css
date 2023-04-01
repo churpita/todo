@@ -2,14 +2,18 @@
     min-height: 100vh;
     padding: 2em;
     overflow: auto;
+    background: var(--theme-page-background);
+    color: var(--theme-font-color);
 }
 
 .app-theme-dark {
-    background: #222;
-    color: white;
+    --theme-page-background: #222;
+    --theme-card-background: #1a1a1a;
+    --theme-font-color: white;
 }
 
 .app-theme-light {
-    background: white;
-    color: black;
+    --theme-page-background: white;
+    --theme-card-background: #E8E8E8;
+    --theme-font-color: black;
 }

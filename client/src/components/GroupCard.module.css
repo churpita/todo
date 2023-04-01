@@ -1,0 +1,12 @@
+.card {
+    background: var(--theme-card-background);
+    padding: 2em;
+    border-radius: 1em;
+    margin-bottom: 2em;
+}
+
+.cardTitle {
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 1em;
+}
