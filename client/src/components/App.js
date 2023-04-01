@@ -1,14 +1,11 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
 
 import Header from './Header';
+import GroupList from "./GroupList";
 
 import './App.css';
-import GroupCard from "./GroupCard";
 
 const App = () => {
-    const { mapName } = useParams();
-
     const [theme, setTheme] = useState("app-theme-dark");
 
     const themeHandler = () => {
@@ -30,12 +27,8 @@ const App = () => {
 
     return (
         <div className={`app-container ${theme}`}>
-            <Header map={mapName} toggleTheme={themeHandler} />
-            <div>
-                {staticContent.map(group => {
-                    return <GroupCard attributes={group} key={group.task_group_key}>Hello!</GroupCard>
-                })}
-            </div>
+            <Header toggleTheme={themeHandler} />
+            <GroupList data={staticContent} />
         </div>
     );
 }

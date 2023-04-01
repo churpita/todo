@@ -24,20 +24,7 @@ module.exports = class TaskGroup {
                 ON TGM.task_group_key = TG.task_group_key
             INNER JOIN task T
                 ON T.task_key = TGM.task_key
+            ORDER BY TG.task_group_key ASC, TGM.sequence ASC
         `);
-    }
-
-    static fetchGroupMembers(task_group_key) {
-        return db.execute(`
-            SELECT 
-                TGM.sequence, 
-                T.title, 
-                T.description,
-                T.is_completed
-            FROM task_group_member TGM
-            INNER JOIN task T
-                ON T.task_key = TGM.task_key
-            WHERE TGM.task_group_key = ?
-        `, [task_group_key]);
     }
 }
