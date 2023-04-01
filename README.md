@@ -1,6 +1,6 @@
 # To-Do Web Application
 A simple CRUD web application to assist in managing and grouping to-do tasks.
-![Prototype application design](https://github.com/churpita/todo/prototype_image.png?raw=true)
+![Prototype application design](prototype_image.png)
 
 # Local Configuration
 To run this application on your local machine, 
