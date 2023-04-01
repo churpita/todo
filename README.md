@@ -1,5 +1,6 @@
 # To-Do Web Application
 A simple CRUD web application to assist in managing and grouping to-do tasks.
+![Prototype application design](https://github.com/churpita/todo/prototype_image.png?raw=true)
 
 # Local Configuration
 To run this application on your local machine, 
@@ -10,8 +11,9 @@ To run this application on your local machine,
 
 3. At **`server\`**, run `npm install`, and then `npm start` to start the server. By default, the server will run on port 8080. This can be adjusted if necessary within **`server\app.js`** at the `app.listen(8080)` call.
 
-(WIP)
+4. At **`client\`**, run `npm install` and then `npm start` to start the application. Alternatively, `npm build` can be used to compile the React code. 
 
 # Tech Stack
 - Node (Express)
 - MySQL
+- React.js
