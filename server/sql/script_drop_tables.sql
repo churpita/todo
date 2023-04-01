@@ -1,0 +1,3 @@
+DROP TABLE IF EXISTS task_group_member;
+DROP TABLE IF EXISTS task;
+DROP TABLE IF EXISTS task_group;
