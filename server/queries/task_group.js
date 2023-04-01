@@ -6,7 +6,7 @@ module.exports = class TaskGroup {
             SELECT
                 task_group_key, 
                 title, 
-                background_color
+                color
             FROM task_group
         `);
     }
