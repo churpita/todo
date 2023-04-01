@@ -1,0 +1,15 @@
+.app-container {
+    min-height: 100vh;
+    padding: 2em;
+    overflow: auto;
+}
+
+.app-theme-dark {
+    background: #222;
+    color: white;
+}
+
+.app-theme-light {
+    background: white;
+    color: black;
+}
