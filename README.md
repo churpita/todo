@@ -1,5 +1,7 @@
 # To-Do Web Application
 A simple CRUD web application to assist in managing and grouping to-do tasks.
+
+Prototype design (client work in progress):
 ![Prototype application design](prototype_image.png)
 
 # Local Configuration
