@@ -6,9 +6,12 @@ import { MdAddCircleOutline } from "react-icons/md";
 
 import IconButton from "./IconButton";
 import GroupCard from "./GroupCard";
+import AddGroupModal from "./AddGroupModal";
 
 const GroupList = props => {
+    console.log('Re-rendered group list');
     const [loading, setLoading] = useState(true);
+    const [addGroupModalVisible, setAddGroupModalVisible] = useState(true);
     const [fetchErrorMessage, setFetchErrorMessage] = useState(null);
     const [taskData, taskDataDispatch] = useReducer(tasksReducer, {
         statusMessage: null,
@@ -18,20 +21,43 @@ const GroupList = props => {
         }
     });
 
-    const addGroupHandler = (title, color) => {
-        // Attempt to post the new group to the API
-        //      If successful, update the state accordingly
-        //      If unsuccessful, throw an error message and don't make any further changes
-        const newTaskGroupKey = Math.max.apply(Math, taskData.content.groups.map(group => group.task_group_key)) + 1;
+    const showGroupModal = () => setAddGroupModalVisible(true);
+    const hideGroupModal = () => setAddGroupModalVisible(false);
 
-        taskDataDispatch({ 
-            type: tasksActions.ADD_GROUP, 
-            payload: {
-                task_group_key: newTaskGroupKey,
-                title: title,
-                color: color 
-            } 
-        });
+    const addGroupHandler = async (title, color) => {
+        const newTaskGroupKey = Math.max.apply(Math, taskData.content.groups.map(group => group.task_group_key)) + 1;
+        try {
+            const addGroupApiResponse = await fetch(`${process.env.REACT_APP_API_URL}/add-group`, {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    task_group_key: newTaskGroupKey,
+                    title: title,
+                    color: color
+                })
+            })
+
+            const addGroupApiJson = await addGroupApiResponse.json();
+
+            if (addGroupApiJson.statusMessage) {
+                setFetchErrorMessage(taskDataApiJson.statusMessage);
+            }
+            else {
+                taskDataDispatch({ 
+                    type: tasksActions.ADD_GROUP, 
+                    payload: {
+                        task_group_key: addGroupApiJson.content.newGroup.task_group_key,
+                        title: addGroupApiJson.content.newGroup.title,
+                        color: addGroupApiJson.content.newGroup.color 
+                    } 
+                });
+            }
+        }
+        catch (err) {
+            setFetchErrorMessage("An error occurred when adding the task group.");
+        }
     }
 
     const fetchTaskData = async () =>  {
@@ -86,8 +112,10 @@ const GroupList = props => {
                     )
                 })}
                 <IconButton>
-                    <MdAddCircleOutline onClick={e => addGroupHandler("School Tasks", '2bb32b')} size={"2em"} />
+                    <MdAddCircleOutline onClick={showGroupModal} size={"2em"} />
                 </IconButton>
+
+                {addGroupModalVisible && <AddGroupModal handler={addGroupHandler} onClose={hideGroupModal} />}
             </>
             }
         </>
