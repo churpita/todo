@@ -1,7 +1,10 @@
 .header {
     display: flex;
-    justify-content: right;
+    justify-content: space-between;
     align-items: center;
     height: 2rem;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
+    max-width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
 }

@@ -7,34 +7,57 @@ import './App.css';
 
 const App = () => {
     const [theme, setTheme] = useState("app-theme-dark");
-
-    const themeHandler = () => {
-        setTheme((curr) => (curr === "app-theme-dark" ? "app-theme-light" : "app-theme-dark"));
-    }
-
     const [loading, setLoading] = useState(true);
     const [fetchErrorMessage, setFetchErrorMessage] = useState(null);
-
     const [taskData, setTaskData] = useState({
         statusMessage: null,
         content: {
-            groups: null,
-            members: null
+            groups: [],
+            members: []
         }
     })
 
+    const themeToggler = () => {
+        setTheme((curr) => (curr === "app-theme-dark" ? "app-theme-light" : "app-theme-dark"));
+    }
+
+    const addGroupHandler = (title, color) => {
+        // First, calculate the max task_group_key, and increment it to create the new record's key
+        const newTaskGroupKey = Math.max.apply(Math, taskData.content.groups.map(group => group.task_group_key)) + 1;
+        const newTaskGroup = {
+            task_group_key: newTaskGroupKey,
+            title: title,
+            color: color
+        }
+        
+        //console.log(`addGroupHandler called in App.js\nkey: ${newTaskGroupKey}\ntitle: ${title}\ncolor: ${color}`);
+        
+        // Attempt to post the new group to the API
+        //      If successful, update the state accordingly
+        //      If unsuccessful, throw an error message and don't make any further changes
+
+        setTaskData(prev => {
+            // First add the new group into the groups array
+            const updatedGroups = [...prev.content.groups, newTaskGroup];
+            // Then merge that updated groups array into the new content array
+            const updatedContent = {groups: updatedGroups, members: prev.content.members};
+            // And finally, push the new content array to the new state of taskData
+            return {statusMessage: prev.statusMessage, content: updatedContent};
+        });
+    }
+
     async function fetchTaskData() {
-        console.log('fetching');
+        console.log('Fetching tasks from API');
         try {
             const taskDataApiResponse = await fetch(`${process.env.REACT_APP_API_URL}/groups`);
-            const taskData = await taskDataApiResponse.json();
+            const taskDataApiJson = await taskDataApiResponse.json();
 
-            if (taskData.statusMessage) {
-                setFetchErrorMessage(taskData.statusMessage);
+            if (taskDataApiJson.statusMessage) {
+                setFetchErrorMessage(taskDataApiJson.statusMessage);
                 setLoading(false);
             }
             else {
-                setTaskData(taskData.content);
+                setTaskData(taskDataApiJson);
                 setLoading(false);
             }
         }
@@ -51,7 +74,7 @@ const App = () => {
 
     return (
         <div className={`app-container ${theme}`}>
-            <Header toggleTheme={themeHandler} />
+            <Header toggleTheme={themeToggler} addGroup={addGroupHandler} />
 
             {/* Display error message */}
             {fetchErrorMessage && !loading && <div>{fetchErrorMessage}</div>}
@@ -60,7 +83,7 @@ const App = () => {
             {!fetchErrorMessage && loading && <div>Task data loading...</div>}
 
             {/* Display group list after data has been fetched */}
-            {!fetchErrorMessage && !loading && <GroupList data={taskData} />}
+            {!fetchErrorMessage && !loading && <GroupList data={taskData.content} />}
         </div>
     );
 }
