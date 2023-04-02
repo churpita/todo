@@ -27,4 +27,21 @@ module.exports = class TaskGroup {
             ORDER BY TG.task_group_key ASC, TGM.sequence ASC
         `);
     }
+
+    static addGroup(newGroup) {
+        return db.execute(`
+            INSERT INTO task_group
+            (
+                task_group_key,
+                title, 
+                color
+            )
+            VALUES 
+            (
+                ?,
+                ?,
+                ?
+            )
+        `, [newGroup.task_group_key, newGroup.title, newGroup.color]);
+    }
 }
