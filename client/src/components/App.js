@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import Header from './Header';
 import GroupList from "./GroupList";
@@ -12,23 +12,55 @@ const App = () => {
         setTheme((curr) => (curr === "app-theme-dark" ? "app-theme-light" : "app-theme-dark"));
     }
 
-    const staticContent = [
-        {
-            "task_group_key": 1,
-            "title": "Work Tasks",
-            "color": "2688B6"
-        },
-        {
-            "task_group_key": 2,
-            "title": "Personal Tasks",
-            "color": "B62626"
+    const [loading, setLoading] = useState(true);
+    const [fetchErrorMessage, setFetchErrorMessage] = useState(null);
+
+    const [taskData, setTaskData] = useState({
+        statusMessage: null,
+        content: {
+            groups: null,
+            members: null
         }
-    ]
+    })
+
+    async function fetchTaskData() {
+        console.log('fetching');
+        try {
+            const taskDataApiResponse = await fetch(`${process.env.REACT_APP_API_URL}/groups`);
+            const taskData = await taskDataApiResponse.json();
+
+            if (taskData.statusMessage) {
+                setFetchErrorMessage(taskData.statusMessage);
+                setLoading(false);
+            }
+            else {
+                setTaskData(taskData.content);
+                setLoading(false);
+            }
+        }
+        catch (err) {
+            console.log(err);
+            setFetchErrorMessage("An error occurred when fetching the task data.");
+            setLoading(false);
+        }
+    }
+
+    useEffect(() => {
+        fetchTaskData();
+    }, []);
 
     return (
         <div className={`app-container ${theme}`}>
             <Header toggleTheme={themeHandler} />
-            <GroupList data={staticContent} />
+
+            {/* Display error message */}
+            {fetchErrorMessage && !loading && <div>{fetchErrorMessage}</div>}
+
+            {/* Display loading screen */}
+            {!fetchErrorMessage && loading && <div>Task data loading...</div>}
+
+            {/* Display group list after data has been fetched */}
+            {!fetchErrorMessage && !loading && <GroupList data={taskData} />}
         </div>
     );
 }

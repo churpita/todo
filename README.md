@@ -11,7 +11,7 @@ To run this application on your local machine,
 
 2. Run **`server\sql\database_reset.bat`**. Note that this batch file will drop tables and re-create them, so any stored data within the to-do database will be lost with each re-run. This will be fixed at a later point, as I intend to implement ALTER TABLE calls to avoid any data loss. 
 
-3. At **`server\`**, run `npm install`, and then `npm start` to start the server. By default, the server will run on port 8080. This can be adjusted if necessary within **`server\app.js`** at the `app.listen(8080)` call.
+3. At **`server\`**, run `npm install`, and then `npm start` to start the server. By default, the server will run on port 8080. This can be adjusted if necessary within **`server\app.js`** at the `app.listen(8080)` call. However, do note that any changes must also be made within **`client\.env`**
 
 4. At **`client\`**, run `npm install` and then `npm start` to start the application. Alternatively, `npm build` can be used to compile the React code. 
 
