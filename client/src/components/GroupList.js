@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useReducer } from "react";
+import { tasksReducer, tasksActions } from "./reducers/tasksReducer";
 
 import { TailSpin } from 'react-loader-spinner';
 import { MdAddCircleOutline } from "react-icons/md";
@@ -9,7 +10,7 @@ import GroupCard from "./GroupCard";
 const GroupList = props => {
     const [loading, setLoading] = useState(true);
     const [fetchErrorMessage, setFetchErrorMessage] = useState(null);
-    const [taskData, setTaskData] = useState({
+    const [taskData, taskDataDispatch] = useReducer(tasksReducer, {
         statusMessage: null,
         content: {
             groups: [],
@@ -18,31 +19,22 @@ const GroupList = props => {
     });
 
     const addGroupHandler = (title, color) => {
-        // First, calculate the max task_group_key, and increment it to create the new record's key
-        const newTaskGroupKey = Math.max.apply(Math, taskData.content.groups.map(group => group.task_group_key)) + 1;
-        const newTaskGroup = {
-            task_group_key: newTaskGroupKey,
-            title: title,
-            color: color
-        }
-        
-        //console.log(`addGroupHandler called in App.js\nkey: ${newTaskGroupKey}\ntitle: ${title}\ncolor: ${color}`);
-        
         // Attempt to post the new group to the API
         //      If successful, update the state accordingly
         //      If unsuccessful, throw an error message and don't make any further changes
+        const newTaskGroupKey = Math.max.apply(Math, taskData.content.groups.map(group => group.task_group_key)) + 1;
 
-        setTaskData(prev => {
-            // First add the new group into the groups array
-            const updatedGroups = [...prev.content.groups, newTaskGroup];
-            // Then merge that updated groups array into the new content array
-            const updatedContent = {groups: updatedGroups, members: prev.content.members};
-            // And finally, push the new content array to the new state of taskData
-            return {statusMessage: prev.statusMessage, content: updatedContent};
+        taskDataDispatch({ 
+            type: tasksActions.ADD_GROUP, 
+            payload: {
+                task_group_key: newTaskGroupKey,
+                title: title,
+                color: color 
+            } 
         });
     }
 
-    async function fetchTaskData() {
+    const fetchTaskData = async () =>  {
         console.log('Fetching tasks from API');
         try {
             const taskDataApiResponse = await fetch(`${process.env.REACT_APP_API_URL}/groups`);
@@ -53,7 +45,12 @@ const GroupList = props => {
                 setLoading(false);
             }
             else {
-                setTaskData(taskDataApiJson);
+                taskDataDispatch({ 
+                    type: tasksActions.FETCH_GROUPS, 
+                    payload: {
+                        fetchedTaskData: taskDataApiJson 
+                    } 
+                });
                 setLoading(false);
             }
         }
