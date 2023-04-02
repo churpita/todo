@@ -5,5 +5,5 @@ CREATE TABLE task_group (
   PRIMARY KEY (task_group_key)
 );
 
-INSERT INTO task_group (task_group_key, title, color) VALUES (1, 'Work Tasks', 'c3dbe6');
-INSERT INTO task_group (task_group_key, title, color) VALUES (2, 'Personal Tasks', 'e6c3cf');
+INSERT INTO task_group (task_group_key, title, color) VALUES (1, 'Work Tasks', '2688B6');
+INSERT INTO task_group (task_group_key, title, color) VALUES (2, 'Personal Tasks', 'B62626');

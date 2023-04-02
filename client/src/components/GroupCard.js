@@ -6,6 +6,8 @@ const GroupCard = props => {
     const attrTitle = props.attributes.title;
     const attrColor = props.attributes.color;
 
+    const members = props.members;
+
     const titleStyle = {
         color: `#${attrColor}`
     }
@@ -13,7 +15,11 @@ const GroupCard = props => {
     return (
         <div className={styles.card}>
             <h1 className={styles.cardTitle} style={titleStyle}>{attrTitle}</h1>
-            {props.children}
+            {members.map(member => {
+                return (
+                    <div key={member.sequence}>{member.title}</div>
+                );
+            })}
         </div>
     );
 }
