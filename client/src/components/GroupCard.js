@@ -1,5 +1,7 @@
 import React from "react";
 
+import GroupMemberCard from "./GroupMemberCard";
+
 import styles from "./GroupCard.module.css";
 
 const GroupCard = props => {
@@ -17,7 +19,7 @@ const GroupCard = props => {
             <h1 className={styles.cardTitle} style={titleStyle}>{attrTitle}</h1>
             {members.map(member => {
                 return (
-                    <div key={member.sequence}>{member.title}</div>
+                    <GroupMemberCard key={member.sequence} member={member} />
                 );
             })}
         </div>

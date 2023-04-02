@@ -1,0 +1,11 @@
+.memberCard {
+    background-color: var(--theme-card-alt-background);
+    padding: 1em;
+    border-radius: 1rem;
+    margin-top: 1rem;
+}
+
+.memberCardTitle {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
