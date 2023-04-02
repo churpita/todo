@@ -11,7 +11,7 @@ import AddGroupModal from "./AddGroupModal";
 const GroupList = props => {
     console.log('Re-rendered group list');
     const [loading, setLoading] = useState(true);
-    const [addGroupModalVisible, setAddGroupModalVisible] = useState(true);
+    const [addGroupModalVisible, setAddGroupModalVisible] = useState(false);
     const [fetchErrorMessage, setFetchErrorMessage] = useState(null);
     const [taskData, taskDataDispatch] = useReducer(tasksReducer, {
         statusMessage: null,

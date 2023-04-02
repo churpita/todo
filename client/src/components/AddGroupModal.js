@@ -17,7 +17,7 @@ const AddGroupModal = props => {
 
     return (
         <Modal title="Create New Group" onClose={props.onClose} >
-            <form className={styles.modalForm} onSubmit={submitHandler}>
+            <form className={styles.modalForm} onSubmit={submitHandler} autoComplete="off">
                 <input name="groupTitle" type="text" placeholder="Group Name"/>
 
                 <input name="groupColor" type="color" defaultValue={`#${(Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0')}`}/>
