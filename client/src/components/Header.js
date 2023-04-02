@@ -10,7 +10,7 @@ const Header = props => {
     return (
         <header className={styles.header}>
             <IconButton>
-                <MdAddCircleOutline onClick={e => props.addGroup("School Tasks", '00ff00')} size={"2em"} />
+                <MdAddCircleOutline onClick={e => props.addGroup("School Tasks", '2bb32b')} size={"2em"} />
             </IconButton>
             <IconButton>
                 <MdDarkMode onClick={props.toggleTheme} size={"2em"} />

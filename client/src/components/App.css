@@ -19,3 +19,16 @@
     --theme-card-alt-background: #dbdbdb;
     --theme-font-color: black;
 }
+
+.body {
+    max-width: 1280px;
+    margin: auto;
+}
+
+.loadingSpinner {
+    width: 3rem;
+}
+
+.loadingSpinner svg g g path {
+    stroke: var(--theme-font-color);
+}

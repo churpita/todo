@@ -2,14 +2,12 @@ import React from "react";
 
 import GroupCard from "./GroupCard";
 
-import styles from "./GroupList.module.css";
-
 const GroupList = props => {
     const groups = props.data.groups;
     const allMembers = props.data.members;
 
     return (
-        <div className={styles.groupList}>
+        <div>
             {groups.map(group => {
                 return (
                     <GroupCard 

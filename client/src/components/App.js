@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 
+import { TailSpin } from 'react-loader-spinner';
+
 import Header from './Header';
 import GroupList from "./GroupList";
 
@@ -75,15 +77,16 @@ const App = () => {
     return (
         <div className={`app-container ${theme}`}>
             <Header toggleTheme={themeToggler} addGroup={addGroupHandler} />
+            <div className="body">
+                {/* Display error message */}
+                {fetchErrorMessage && !loading && <div>{fetchErrorMessage}</div>}
 
-            {/* Display error message */}
-            {fetchErrorMessage && !loading && <div>{fetchErrorMessage}</div>}
+                {/* Display loading screen */}
+                {!fetchErrorMessage && loading && <TailSpin wrapperClass="loadingSpinner" />}
 
-            {/* Display loading screen */}
-            {!fetchErrorMessage && loading && <div>Task data loading...</div>}
-
-            {/* Display group list after data has been fetched */}
-            {!fetchErrorMessage && !loading && <GroupList data={taskData.content} />}
+                {/* Display group list after data has been fetched */}
+                {!fetchErrorMessage && !loading && <GroupList data={taskData.content} />}
+            </div>
         </div>
     );
 }
