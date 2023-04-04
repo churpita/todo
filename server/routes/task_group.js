@@ -10,4 +10,7 @@ router.get('/groups', taskGroupController.getGroups);
 // POST /add-group
 router.post('/add-group', taskGroupController.addGroup);
 
+// POST /update-group
+router.post('/update-group', taskGroupController.updateGroup);
+
 module.exports = router;

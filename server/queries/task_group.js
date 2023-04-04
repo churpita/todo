@@ -44,4 +44,14 @@ module.exports = class TaskGroup {
             )
         `, [newGroup.task_group_key, newGroup.title, newGroup.color]);
     }
+
+    static updateGroup(updatedGroup) {
+        return db.execute(`
+            UPDATE task_group
+            SET 
+                title=?,
+                color=?
+            WHERE task_group_key = ?
+        `, [updatedGroup.title, updatedGroup.color, updatedGroup.task_group_key]);
+    }
 }
