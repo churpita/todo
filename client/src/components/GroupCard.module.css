@@ -6,8 +6,14 @@
     margin-bottom: 2rem;
 }
 
+.cardHeaderRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
 .cardTitle {
     font-size: 2rem;
     font-weight: bold;
-    margin-bottom: 1rem;
 }

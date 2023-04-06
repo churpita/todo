@@ -2,17 +2,15 @@ import React, { useState, useEffect, useReducer } from "react";
 import { tasksReducer, tasksActions } from "./reducers/tasksReducer";
 
 import { TailSpin } from 'react-loader-spinner';
-import { MdAddCircleOutline } from "react-icons/md";
 
-import IconButton from "./IconButton";
 import GroupCard from "./GroupCard";
-import AddGroupModal from "./AddGroupModal";
+import ModalTaskGroup from "./ModalTaskGroup";
 
 const GroupList = props => {
     console.log('Re-rendered group list');
     const [loading, setLoading] = useState(true);
-    const [addGroupModalVisible, setAddGroupModalVisible] = useState(false);
     const [fetchErrorMessage, setFetchErrorMessage] = useState(null);
+
     const [taskData, taskDataDispatch] = useReducer(tasksReducer, {
         statusMessage: null,
         content: {
@@ -20,9 +18,6 @@ const GroupList = props => {
             members: []
         }
     });
-
-    const showGroupModal = () => setAddGroupModalVisible(true);
-    const hideGroupModal = () => setAddGroupModalVisible(false);
 
     const addGroupHandler = async (title, color) => {
         const newTaskGroupKey = Math.max.apply(Math, taskData.content.groups.map(group => group.task_group_key)) + 1;
@@ -89,6 +84,7 @@ const GroupList = props => {
 
     useEffect(() => {
         fetchTaskData();
+        console.log('Data fetched');
     }, []);
 
     return (
@@ -111,11 +107,12 @@ const GroupList = props => {
                         />
                     )
                 })}
-                <IconButton>
-                    <MdAddCircleOutline onClick={showGroupModal} size={"2em"} />
-                </IconButton>
 
-                {addGroupModalVisible && <AddGroupModal handler={addGroupHandler} onClose={hideGroupModal} />}
+                <ModalTaskGroup 
+                    action="add"
+                    modalTitle="Create New Group"
+                    handler={addGroupHandler} 
+                />
             </>
             }
         </>
