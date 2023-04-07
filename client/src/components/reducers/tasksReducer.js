@@ -1,6 +1,7 @@
 exports.tasksActions = {
     FETCH_GROUPS: "fetchgroups",
-    ADD_GROUP: "addgroup"
+    ADD_GROUP: "addgroup",
+    UPDATE_GROUP: "updategroup"
 }
 
 exports.tasksReducer = (prev, action) => {
@@ -9,7 +10,8 @@ exports.tasksReducer = (prev, action) => {
         case this.tasksActions.FETCH_GROUPS:
             return action.payload.fetchedTaskData;
 
-        // Payload: { title, color }
+
+        // Payload: { task_group_key, title, color }
         case this.tasksActions.ADD_GROUP:
             const newTaskGroup = {
                 task_group_key: action.payload.task_group_key,
@@ -25,6 +27,24 @@ exports.tasksReducer = (prev, action) => {
 
             // And finally, push the new content array to the new state of taskData
             return {statusMessage: prev.statusMessage, content: updatedContent};
+
+
+        // Payload: { task_group_key, title, color }
+        case this.tasksActions.UPDATE_GROUP:
+            const updatedTaskGroup = {
+                task_group_key: action.payload.task_group_key,
+                title: action.payload.title,
+                color: action.payload.color
+            }
+
+            return {
+                statusMessage: prev.statusMessage,
+                content: {
+                    groups: prev.content.groups.map((group) => { return group.task_group_key == updatedTaskGroup.task_group_key ? updatedTaskGroup : group }),
+                    members: prev.content.members
+                }
+            }
+
 
         default:
             return prev;

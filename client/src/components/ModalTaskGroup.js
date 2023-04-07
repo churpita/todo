@@ -26,8 +26,8 @@ const ModalTaskGroup = props => {
             setVisible(false);
         }
         catch (err) {
-            console.log(err);
-            setErrorMessage(err.message);
+            // Vague error message for security purposes
+            setErrorMessage('An error occurred.');
         }
     }
 
