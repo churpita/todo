@@ -101,6 +101,7 @@ const GroupList = props => {
                 {taskData.content.groups.map(group => {
                     return (
                         <GroupCard 
+                            taskDataDispatch={taskDataDispatch}
                             attributes={group} 
                             members={taskData.content.members.filter(m => m.task_group_key == group.task_group_key)} 
                             key={group.task_group_key} 
