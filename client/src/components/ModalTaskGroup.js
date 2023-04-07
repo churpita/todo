@@ -8,23 +8,34 @@ import styles from "./ModalTaskGroup.module.css";
 
 const ModalTaskGroup = props => {
     const [visible, setVisible] = useState(false);
+    const [errorMessage, setErrorMessage] = useState(null);
 
-    const submitHandler = event => {
+    const closeHandler = e => {
+        setVisible(false);
+        setErrorMessage(null);
+    }
+
+    const submitHandler = async event => {
         event.preventDefault();
         
-        props.handler(
-            event.target.groupTitle.value, 
-            event.target.groupColor.value.substring(1)
-        );
-        
-        setVisible(false);
+        try {
+            await props.handler(
+                event.target.groupTitle.value, 
+                event.target.groupColor.value.substring(1)
+            );
+            setVisible(false);
+        }
+        catch (err) {
+            console.log(err);
+            setErrorMessage(err.message);
+        }
     }
 
     return (
         <>
             {
                 visible &&
-                <Modal title={props.modalTitle} onClose={e => setVisible(false)} >
+                <Modal title={props.modalTitle} onClose={closeHandler} >
                     <form className={styles.modalForm} onSubmit={submitHandler} autoComplete="off">
                         <input 
                             name="groupTitle" 
@@ -38,6 +49,8 @@ const ModalTaskGroup = props => {
                             type="color" 
                             defaultValue={`#${props.attributes && props.attributes.color ? props.attributes.color : (Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0')}`}
                         />
+
+                        {errorMessage && <div>{errorMessage}</div>}
 
                         <div>
                             <input type="submit" value="Save"/>

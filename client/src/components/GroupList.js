@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useReducer } from "react";
 import { tasksReducer, tasksActions } from "./reducers/tasksReducer";
 
-import { TailSpin } from 'react-loader-spinner';
-
 import GroupCard from "./GroupCard";
 import ModalTaskGroup from "./ModalTaskGroup";
+import LoadingSpinner from "./LoadingSpinner";
 
 const GroupList = props => {
     console.log('Re-rendered group list');
@@ -21,37 +20,33 @@ const GroupList = props => {
 
     const addGroupHandler = async (title, color) => {
         const newTaskGroupKey = Math.max.apply(Math, taskData.content.groups.map(group => group.task_group_key)) + 1;
-        try {
-            const addGroupApiResponse = await fetch(`${process.env.REACT_APP_API_URL}/add-group`, {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    task_group_key: newTaskGroupKey,
-                    title: title,
-                    color: color
-                })
+
+        const addGroupApiResponse = await fetch(`${process.env.REACT_APP_API_URL}/add-group`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                task_group_key: newTaskGroupKey,
+                title: title,
+                color: color
             })
+        })
 
-            const addGroupApiJson = await addGroupApiResponse.json();
+        const addGroupApiJson = await addGroupApiResponse.json();
 
-            if (addGroupApiJson.statusMessage) {
-                setFetchErrorMessage(taskDataApiJson.statusMessage);
-            }
-            else {
-                taskDataDispatch({ 
-                    type: tasksActions.ADD_GROUP, 
-                    payload: {
-                        task_group_key: addGroupApiJson.content.newGroup.task_group_key,
-                        title: addGroupApiJson.content.newGroup.title,
-                        color: addGroupApiJson.content.newGroup.color 
-                    } 
-                });
-            }
+        if (addGroupApiJson.statusMessage) {
+            throw new Error(taskDataApiJson.statusMessage);
         }
-        catch (err) {
-            setFetchErrorMessage("An error occurred when adding the task group.");
+        else {
+            taskDataDispatch({ 
+                type: tasksActions.ADD_GROUP, 
+                payload: {
+                    task_group_key: addGroupApiJson.content.newGroup.task_group_key,
+                    title: addGroupApiJson.content.newGroup.title,
+                    color: addGroupApiJson.content.newGroup.color 
+                } 
+            });
         }
     }
 
@@ -93,7 +88,7 @@ const GroupList = props => {
             {fetchErrorMessage && !loading && <div>{fetchErrorMessage}</div>}
 
             {/* Display loading screen */}
-            {!fetchErrorMessage && loading && <TailSpin wrapperClass="loadingSpinner" />}
+            {!fetchErrorMessage && loading && <LoadingSpinner />}
 
             {/* Display group list after data has been fetched */}
             {!fetchErrorMessage && !loading &&
