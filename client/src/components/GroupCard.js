@@ -1,6 +1,8 @@
 import React from "react";
-import { tasksActions } from "./reducers/tasksReducer";
+import { taskGroupActions } from "./reducers/taskGroupReducer";
+import { MdAdd } from "react-icons/md";
 
+import IconButton from "./IconButton";
 import GroupMemberCard from "./GroupMemberCard";
 import ModalTaskGroup from "./ModalTaskGroup";
 
@@ -33,7 +35,7 @@ const GroupCard = props => {
         }
         else {
             props.taskDataDispatch({ 
-                type: tasksActions.UPDATE_GROUP, 
+                type: taskGroupActions.UPDATE_GROUP, 
                 payload: {
                     task_group_key: updateGroupApiJson.content.updatedGroupObj.task_group_key,
                     title: updateGroupApiJson.content.updatedGroupObj.title,
@@ -54,11 +56,16 @@ const GroupCard = props => {
                     handler={updateGroupHandler} 
                 />
             </div>
-            {members.map(member => {
-                return (
-                    <GroupMemberCard key={member.sequence} member={member} />
-                );
-            })}
+            <div className={styles.cardGroupMembers}>
+                {members.map(member => {
+                    return (
+                        <GroupMemberCard key={member.sequence} member={member} />
+                    );
+                })}
+                <IconButton>
+                    <MdAdd size="2rem" onClick={e => console.log(1)} />
+                </IconButton>
+            </div>
         </div>
     );
 }

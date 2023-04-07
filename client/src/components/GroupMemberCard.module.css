@@ -1,8 +1,8 @@
 .memberCard {
     background-color: var(--theme-card-alt-background);
+    width: 100%;
     padding: 1em;
     border-radius: 1rem;
-    margin-top: 1rem;
 }
 
 .memberCardTitle {

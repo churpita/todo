@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useReducer } from "react";
-import { tasksReducer, tasksActions } from "./reducers/tasksReducer";
+import { taskGroupReducer, taskGroupActions } from "./reducers/taskGroupReducer";
 
 import GroupCard from "./GroupCard";
 import ModalTaskGroup from "./ModalTaskGroup";
@@ -10,7 +10,7 @@ const GroupList = props => {
     const [loading, setLoading] = useState(true);
     const [fetchErrorMessage, setFetchErrorMessage] = useState(null);
 
-    const [taskData, taskDataDispatch] = useReducer(tasksReducer, {
+    const [taskData, taskDataDispatch] = useReducer(taskGroupReducer, {
         statusMessage: null,
         content: {
             groups: [],
@@ -40,7 +40,7 @@ const GroupList = props => {
         }
         else {
             taskDataDispatch({ 
-                type: tasksActions.ADD_GROUP, 
+                type: taskGroupActions.ADD_GROUP, 
                 payload: {
                     task_group_key: addGroupApiJson.content.newGroup.task_group_key,
                     title: addGroupApiJson.content.newGroup.title,
@@ -62,7 +62,7 @@ const GroupList = props => {
             }
             else {
                 taskDataDispatch({ 
-                    type: tasksActions.FETCH_GROUPS, 
+                    type: taskGroupActions.FETCH_GROUPS, 
                     payload: {
                         fetchedTaskData: taskDataApiJson 
                     } 

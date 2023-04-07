@@ -1,18 +1,18 @@
-exports.tasksActions = {
+exports.taskGroupActions = {
     FETCH_GROUPS: "fetchgroups",
     ADD_GROUP: "addgroup",
     UPDATE_GROUP: "updategroup"
 }
 
-exports.tasksReducer = (prev, action) => {
+exports.taskGroupReducer = (prev, action) => {
     switch (action.type) {
         // Payload: { fetchedTaskData }
-        case this.tasksActions.FETCH_GROUPS:
+        case this.taskGroupActions.FETCH_GROUPS:
             return action.payload.fetchedTaskData;
 
 
         // Payload: { task_group_key, title, color }
-        case this.tasksActions.ADD_GROUP:
+        case this.taskGroupActions.ADD_GROUP:
             const newTaskGroup = {
                 task_group_key: action.payload.task_group_key,
                 title: action.payload.title,
@@ -30,7 +30,7 @@ exports.tasksReducer = (prev, action) => {
 
 
         // Payload: { task_group_key, title, color }
-        case this.tasksActions.UPDATE_GROUP:
+        case this.taskGroupActions.UPDATE_GROUP:
             const updatedTaskGroup = {
                 task_group_key: action.payload.task_group_key,
                 title: action.payload.title,
