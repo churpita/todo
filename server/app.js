@@ -12,9 +12,11 @@ app.use((req,res,next) => {
 })
 
 const taskGroupRoutes = require('./routes/task_group');
+const taskRoutes = require('./routes/task');
 
 // app.use('/static', express.static('static'));
 
 app.use(taskGroupRoutes);
+app.use(taskRoutes);
 
 app.listen(8080);
