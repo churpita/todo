@@ -6,6 +6,7 @@ exports.taskActions = {
 }
 
 exports.taskReducer = (prev, action) => {
+    var updatedContent;
     switch (action.type) {
         // Payload: { fetchedTaskData }
         case this.taskActions.FETCH_GROUPS:
@@ -24,7 +25,7 @@ exports.taskReducer = (prev, action) => {
             const updatedGroups = [...prev.content.groups, newTaskGroup];
 
             // Then merge that updated groups array into the new content array
-            const updatedContent = {groups: updatedGroups, members: prev.content.members};
+            updatedContent = {groups: updatedGroups, members: prev.content.members};
 
             // And finally, push the new content array to the new state of taskData
             return {statusMessage: prev.statusMessage, content: updatedContent};
@@ -46,9 +47,26 @@ exports.taskReducer = (prev, action) => {
                 }
             }
 
+        // Payload: { task_group_key, task_key, sequence, title, description }
         case this.taskActions.ADD_GROUP_MEMBER:
-            return prev;
+            const newTask = {
+                task_group_key: action.payload.task_group_key,
+                task_key: action.payload.task_key,
+                sequence: action.payload.sequence,
+                title: action.payload.title,
+                description: action.payload.description
+            }
 
+            // First add the new task into the members array
+            const updatedMembers = [...prev.content.members, newTask];
+
+            // Then merge that updated members array into the new content array
+            updatedContent = {groups: prev.content.groups, members: updatedMembers};
+
+            // And finally, push the new content array to the new state of taskData
+            return {statusMessage: prev.statusMessage, content: updatedContent};
+
+            
         default:
             return prev;
     }

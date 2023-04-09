@@ -19,7 +19,10 @@ const ModalTaskGroupMember = props => {
         event.preventDefault();
         
         try {
-
+            await props.handler(
+                event.target.taskTitle.value, 
+                event.target.taskDescription.value
+            );
             setVisible(false);
         }
         catch (err) {

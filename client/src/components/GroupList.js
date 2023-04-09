@@ -71,7 +71,6 @@ const GroupList = props => {
             }
         }
         catch (err) {
-            console.log(err);
             setFetchErrorMessage("An error occurred when fetching the task data.");
             setLoading(false);
         }
@@ -96,6 +95,7 @@ const GroupList = props => {
                 {taskData.content.groups.map(group => {
                     return (
                         <GroupCard 
+                            taskData={taskData}
                             taskDataDispatch={taskDataDispatch}
                             attributes={group} 
                             members={taskData.content.members.filter(m => m.task_group_key == group.task_group_key)} 

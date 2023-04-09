@@ -15,6 +15,7 @@ module.exports = class TaskGroup {
         return db.execute(`
             SELECT
                 TG.task_group_key,
+                T.task_key,
                 TGM.sequence,
                 T.title,
                 T.description,

@@ -34,7 +34,7 @@ exports.addTask = async (req, res) => {
         res.status(200).json({
             statusMessage: null,
             content: {
-                newTask: newTaskObj
+                newTask: {task_group_key, task_key, sequence, title, description}
             }
         })
     }
