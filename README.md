@@ -4,6 +4,18 @@ A simple CRUD web application to assist in managing and grouping to-do tasks.
 Prototype design (client work in progress):
 ![Prototype application design](prototype_image.png)
 
+# Feature Backlog
+### Tasks
+- Update task titles/descriptions
+- Mark tasks as completed
+- Delete tasks
+### Task Groups
+- Delete task groups
+### General
+- Re-ordering for tasks and task groups
+- User authentication system
+- Dockerize the application
+
 # Local Configuration
 To run this application on your local machine, 
 
