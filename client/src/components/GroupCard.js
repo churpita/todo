@@ -15,9 +15,12 @@ const GroupCard = props => {
     }
 
     const addTaskHandler = async (title, description) => {
-        const newTaskKey = Math.max.apply(Math, props.taskData.content.members.map(member => member.task_key)) + 1;
+        // If adding a first task/first task to a new group, -Infinity is the result of the Math.max query, so we want the sequence/key to be reset to 1 in those situations
+        let newTaskKey = Math.max.apply(Math, props.taskData.content.members.map(member => member.task_key)) + 1;
+        if (Math.abs(newTaskKey) == Infinity) newTaskKey = 1;
+
         let newTaskSeq = Math.max.apply(Math, props.taskData.content.members.filter(member => member.task_group_key == props.attributes.task_group_key).map(member => member.sequence)) + 1;
-        if (Math.abs(newTaskSeq) == Infinity) newTaskSeq = 1; // If adding the first task to a new group, -Infinity is the result of the Math.max query, so we want the sequence to be reset to 1
+        if (Math.abs(newTaskSeq) == Infinity) newTaskSeq = 1;
 
         const addTaskApiResponse = await fetch(`${process.env.REACT_APP_API_URL}/add-task`, {
             method: "POST",

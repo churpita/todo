@@ -19,7 +19,9 @@ const GroupList = props => {
     });
 
     const addGroupHandler = async (action, title, color) => {
-        const newTaskGroupKey = Math.max.apply(Math, taskData.content.groups.map(group => group.task_group_key)) + 1;
+        // If adding a first group, -Infinity is the result of the Math.max query, so we want the key to be reset to 1 in that situation
+        let newTaskGroupKey = Math.max.apply(Math, taskData.content.groups.map(group => group.task_group_key)) + 1;
+        if (Math.abs(newTaskGroupKey) == Infinity) newTaskGroupKey = 1;
 
         const addGroupApiResponse = await fetch(`${process.env.REACT_APP_API_URL}/add-group`, {
             method: "POST",
