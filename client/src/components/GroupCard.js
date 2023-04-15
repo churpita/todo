@@ -58,7 +58,7 @@ const GroupCard = props => {
     const updateGroupHandler = async (action, title, color) => {
         if (action == 'Save') {
             const updateGroupApiResponse = await fetch(`${process.env.REACT_APP_API_URL}/update-group`, {
-                method: "POST",
+                method: "PUT",
                 headers: {
                     'Content-Type': 'application/json'
                 },

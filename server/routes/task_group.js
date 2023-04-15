@@ -10,8 +10,8 @@ router.get('/groups', taskGroupController.getGroups);
 // POST /add-group
 router.post('/add-group', taskGroupController.addGroup);
 
-// POST /update-group
-router.post('/update-group', taskGroupController.updateGroup);
+// PUT /update-group
+router.put('/update-group', taskGroupController.updateGroup);
 
 // DELETE /delete-group
 router.delete('/delete-group', taskGroupController.deleteGroup);
