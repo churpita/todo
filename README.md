@@ -7,11 +7,13 @@ Prototype design (client work in progress):
 # Feature Backlog
 ### Tasks
 - Update task titles/descriptions
+- Deadlines/desktop reminders for tasks
 - Mark tasks as completed
 - Delete tasks
 ### Task Groups
 - Delete task groups
 ### General
+- Loading spinner for Modals
 - Re-ordering for tasks and task groups
 - User authentication system
 - Dockerize the application
