@@ -10,8 +10,6 @@ Prototype design (client work in progress):
 - Deadlines/desktop reminders for tasks
 - Mark tasks as completed
 - Delete tasks
-### Task Groups
-- Delete task groups
 ### General
 - Loading spinner for Modals
 - Re-ordering for tasks and task groups
