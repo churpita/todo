@@ -52,33 +52,60 @@ const GroupCard = props => {
         }
     }
 
-    const updateGroupHandler = async (title, color) => {
-        const updateGroupApiResponse = await fetch(`${process.env.REACT_APP_API_URL}/update-group`, {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                task_group_key: props.attributes.task_group_key,
-                title: title,
-                color: color
+    const updateGroupHandler = async (action, title, color) => {
+        if (action == 'Save') {
+            const updateGroupApiResponse = await fetch(`${process.env.REACT_APP_API_URL}/update-group`, {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    task_group_key: props.attributes.task_group_key,
+                    title: title,
+                    color: color
+                })
             })
-        })
-
-        const updateGroupApiJson = await updateGroupApiResponse.json();
-
-        if (updateGroupApiJson.statusMessage) {
-            throw new Error(updateGroupApiJson.statusMessage);
+    
+            const updateGroupApiJson = await updateGroupApiResponse.json();
+    
+            if (updateGroupApiJson.statusMessage) {
+                throw new Error(updateGroupApiJson.statusMessage);
+            }
+            else {
+                props.taskDataDispatch({ 
+                    type: taskActions.UPDATE_GROUP, 
+                    payload: {
+                        task_group_key: updateGroupApiJson.content.updatedGroupObj.task_group_key,
+                        title: updateGroupApiJson.content.updatedGroupObj.title,
+                        color: updateGroupApiJson.content.updatedGroupObj.color 
+                    } 
+                });
+            }
         }
-        else {
-            props.taskDataDispatch({ 
-                type: taskActions.UPDATE_GROUP, 
-                payload: {
-                    task_group_key: updateGroupApiJson.content.updatedGroupObj.task_group_key,
-                    title: updateGroupApiJson.content.updatedGroupObj.title,
-                    color: updateGroupApiJson.content.updatedGroupObj.color 
-                } 
-            });
+        else if (action == 'Delete') {
+            const deleteGroupApiResponse = await fetch(`${process.env.REACT_APP_API_URL}/delete-group`, {
+                method: "DELETE",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    task_group_key: props.attributes.task_group_key,
+                })
+            })
+    
+            const deleteGroupApiJson = await deleteGroupApiResponse.json();
+    
+            if (deleteGroupApiJson.statusMessage) {
+                throw new Error(deleteGroupApiJson.statusMessage);
+            }
+            else {
+                props.taskDataDispatch({
+                    type: taskActions.DELETE_GROUP,
+                    payload: {
+                        task_group_key: props.attributes.task_group_key
+                    }
+                });
+            }
         }
     }
 

@@ -1,4 +1,5 @@
 .modalForm {
+    width: 100%;
     display: inline-flex;
     flex-direction: column;
     align-items: baseline;
@@ -8,7 +9,7 @@
     font-family: inherit;
 }
 
-.modalForm input:not(:last-child) {
+.modalForm input:not([type="submit"]) {
     margin-bottom: 1rem;
 }
 
@@ -20,20 +21,38 @@
     border-radius: 0.5rem;
 }
 
-/* Submit Button */
+/* Submit Buttons */
+
+.submitRow {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
 
 .modalForm input[type=submit] {
     padding: 0.5rem 1rem;
     border: none;
     border-radius: 0.5rem;
-    background-color: rgb(36, 101, 112);
     color: white;
     cursor: pointer;
     transition: 0.25s;
 }
 
-.modalForm input[type=submit]:hover {
+.goodSubmit {
+    background-color: rgb(36, 101, 112);
+}
+
+.goodSubmit:hover {
     background-color: rgb(67, 153, 168);
+}
+
+.badSubmit {
+    background-color: rgb(112, 36, 36);
+}
+
+.badSubmit:hover {
+    background-color: rgb(168, 67, 67);
 }
 
 /* Color Picker */

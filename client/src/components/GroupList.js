@@ -18,7 +18,7 @@ const GroupList = props => {
         }
     });
 
-    const addGroupHandler = async (title, color) => {
+    const addGroupHandler = async (action, title, color) => {
         const newTaskGroupKey = Math.max.apply(Math, taskData.content.groups.map(group => group.task_group_key)) + 1;
 
         const addGroupApiResponse = await fetch(`${process.env.REACT_APP_API_URL}/add-group`, {

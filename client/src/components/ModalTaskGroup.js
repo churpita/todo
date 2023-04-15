@@ -17,9 +17,9 @@ const ModalTaskGroup = props => {
 
     const submitHandler = async event => {
         event.preventDefault();
-        
         try {
             await props.handler(
+                event.target.submitValue, // declares whether an update or delete is being performed
                 event.target.groupTitle.value, 
                 event.target.groupColor.value.substring(1)
             );
@@ -52,8 +52,26 @@ const ModalTaskGroup = props => {
 
                         {errorMessage && <div>{errorMessage}</div>}
 
-                        <div>
-                            <input type="submit" value="Save"/>
+                        <div className={styles.submitRow}>
+                            {props.action === "add" && <input 
+                                type="submit" 
+                                value="Add" 
+                                onClick={e => e.target.form.submitValue = e.target.value}
+                                className={styles.goodSubmit}
+                            />}
+
+                            {props.action === "update" && <input 
+                                type="submit" 
+                                value="Save" 
+                                onClick={e => e.target.form.submitValue = e.target.value}
+                                className={styles.goodSubmit}
+                            />}
+                            {props.action === "update" && <input 
+                                type="submit" 
+                                value="Delete" 
+                                onClick={e => e.target.form.submitValue = e.target.value}
+                                className={styles.badSubmit} 
+                            />}
                         </div>
                     </form>
                 </Modal>
