@@ -13,4 +13,7 @@ router.post('/add-group', taskGroupController.addGroup);
 // POST /update-group
 router.post('/update-group', taskGroupController.updateGroup);
 
+// DELETE /delete-group
+router.delete('/delete-group', taskGroupController.deleteGroup);
+
 module.exports = router;

@@ -55,4 +55,10 @@ module.exports = class TaskGroup {
             WHERE task_group_key = ?
         `, [updatedGroup.title, updatedGroup.color, updatedGroup.task_group_key]);
     }
+
+    static deleteGroup(task_group_key) {
+        return db.execute(`
+            CALL delete_task_group(?);
+        `,[task_group_key]);
+    }
 }
