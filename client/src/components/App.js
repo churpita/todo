@@ -6,10 +6,16 @@ import GroupList from "./GroupList";
 import './App.css';
 
 const App = () => {
-    const [theme, setTheme] = useState("app-theme-dark");
+    if (!localStorage.getItem("theme")) localStorage.setItem("theme", "app-theme-dark");
+    
+    const [theme, setTheme] = useState(localStorage.getItem("theme"));
 
     const themeToggler = () => {
-        setTheme((curr) => (curr === "app-theme-dark" ? "app-theme-light" : "app-theme-dark"));
+        setTheme((curr) => {
+            const newTheme = curr === "app-theme-dark" ? "app-theme-light" : "app-theme-dark"
+            localStorage.setItem("theme", newTheme);
+            return newTheme;
+        });
     }
 
     return (
