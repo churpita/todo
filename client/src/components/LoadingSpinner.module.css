@@ -1,7 +1,0 @@
-.loadingSpinner {
-    width: 3rem;
-}
-
-.loadingSpinner svg g g path {
-    stroke: var(--theme-font-color);
-}

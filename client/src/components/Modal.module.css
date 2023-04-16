@@ -23,7 +23,12 @@
     flex-direction: column;
 }
 
-.modalTitle {
+.modalTitleRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 2rem;
     margin-bottom: 1.5rem;
     width: 100%;
 }

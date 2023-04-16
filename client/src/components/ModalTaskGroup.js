@@ -8,25 +8,31 @@ import styles from "./ModalTaskGroup.module.css";
 
 const ModalTaskGroup = props => {
     const [visible, setVisible] = useState(false);
+    const [loading, setLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState(null);
 
     const closeHandler = e => {
         setVisible(false);
+        setLoading(false);
         setErrorMessage(null);
     }
 
     const submitHandler = async event => {
         event.preventDefault();
+        setErrorMessage(null);
+        setLoading(true);
         try {
             await props.handler(
                 event.target.submitValue, // declares whether an update or delete is being performed
                 event.target.groupTitle.value, 
                 event.target.groupColor.value.substring(1)
             );
+            setLoading(false);
             setVisible(false);
         }
         catch (err) {
             // Vague error message for security purposes
+            setLoading(false);
             setErrorMessage('An error occurred.');
         }
     }
@@ -35,7 +41,7 @@ const ModalTaskGroup = props => {
         <>
             {
                 visible &&
-                <Modal title={props.modalTitle} onClose={closeHandler} >
+                <Modal title={props.modalTitle} onClose={closeHandler} loadingState={loading} >
                     <form className={styles.modalForm} onSubmit={submitHandler} autoComplete="off">
                         <input 
                             name="groupTitle" 
@@ -50,7 +56,7 @@ const ModalTaskGroup = props => {
                             defaultValue={`#${props.attributes && props.attributes.color ? props.attributes.color : (Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0')}`}
                         />
 
-                        {errorMessage && <div>{errorMessage}</div>}
+                        {errorMessage && !loading && <div>{errorMessage}</div>}
 
                         <div className={styles.submitRow}>
                             {props.action === "add" && <input 

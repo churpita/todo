@@ -89,7 +89,7 @@ const GroupList = props => {
             {fetchErrorMessage && !loading && <div>{fetchErrorMessage}</div>}
 
             {/* Display loading screen */}
-            {!fetchErrorMessage && loading && <LoadingSpinner />}
+            {!fetchErrorMessage && loading && <LoadingSpinner width="3rem" height="3rem" />}
 
             {/* Display group list after data has been fetched */}
             {!fetchErrorMessage && !loading &&

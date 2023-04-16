@@ -11,7 +11,6 @@ Prototype design (client work in progress):
 - Mark tasks as completed
 - Delete tasks
 ### General
-- Loading spinner for Modals
 - Re-ordering for tasks and task groups
 - User authentication system
 - Dockerize the application

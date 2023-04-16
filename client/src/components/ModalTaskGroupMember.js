@@ -8,25 +8,30 @@ import styles from "./ModalTaskGroupMember.module.css";
 
 const ModalTaskGroupMember = props => {
     const [visible, setVisible] = useState(false);
+    const [loading, setLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState(null);
 
     const closeHandler = e => {
         setVisible(false);
+        setLoading(false);
         setErrorMessage(null);
     }
 
     const submitHandler = async event => {
         event.preventDefault();
-        
+        setErrorMessage(null);
+        setLoading(true);
         try {
             await props.handler(
                 event.target.taskTitle.value, 
                 event.target.taskDescription.value
             );
+            setLoading(false);
             setVisible(false);
         }
         catch (err) {
             // Vague error message for security purposes
+            setLoading(false);
             setErrorMessage('An error occurred.');
         }
     }
@@ -35,7 +40,7 @@ const ModalTaskGroupMember = props => {
         <>
             {
                 visible &&
-                <Modal title={props.modalTitle} onClose={closeHandler} >
+                <Modal title={props.modalTitle} onClose={closeHandler} loadingState={loading}>
                     <form className={styles.modalForm} onSubmit={submitHandler} autoComplete="off">
                         <input 
                             name="taskTitle" 
@@ -49,7 +54,7 @@ const ModalTaskGroupMember = props => {
                             rows={4}
                         />
 
-                        {errorMessage && <div>{errorMessage}</div>}
+                        {errorMessage && !loading && <div>{errorMessage}</div>}
 
                         <div>
                             <input type="submit" value="Save"/>

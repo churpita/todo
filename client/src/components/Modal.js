@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import styles from './Modal.module.css';
+import LoadingSpinner from "./LoadingSpinner";
 
 const portalElement = document.getElementById('overlays');
 
@@ -12,7 +13,10 @@ const Backdrop = props => {
 const ModalOverlay = props => {
     return (
         <div className={styles.modal}>
-            <h3 className={styles.modalTitle}>{props.modalTitle}</h3>
+            <div className={styles.modalTitleRow}>
+                <h3>{props.modalTitle}</h3>
+                {props.loadingState && <LoadingSpinner width="2rem" height="2rem" color="black" />}
+            </div>
             <div>
                 {props.children}
             </div>
@@ -24,7 +28,7 @@ const Modal = props => {
     return (
         <React.Fragment>
             {ReactDOM.createPortal(<Backdrop onClose={props.onClose} />, portalElement)}
-            {ReactDOM.createPortal(<ModalOverlay modalTitle={props.title}>{props.children}</ModalOverlay>, portalElement)}
+            {ReactDOM.createPortal(<ModalOverlay loadingState={props.loadingState} modalTitle={props.title}>{props.children}</ModalOverlay>, portalElement)}
         </React.Fragment>
     );
 }

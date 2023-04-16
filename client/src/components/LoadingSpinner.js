@@ -2,11 +2,13 @@ import React from "react";
 
 import { TailSpin } from 'react-loader-spinner';
 
-import styles from './LoadingSpinner.module.css';
-
 const LoadingSpinner = props => {
     return (
-        <TailSpin wrapperClass={styles.loadingSpinner} />
+        <TailSpin 
+            width={props.width} 
+            height={props.height}
+            color={props.color || "var(--theme-font-color)"}
+        />
     );
 } 
 
