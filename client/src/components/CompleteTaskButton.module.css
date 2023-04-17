@@ -1,0 +1,15 @@
+.buttonContainer {
+    position: relative;
+    height: 2rem;
+    width: 2rem;
+    cursor: pointer;
+    user-select: none;
+}
+
+.fade {
+    transition: ease-in-out .125s;
+}
+
+.buttonContainer svg {
+    position: absolute;
+}
