@@ -16,9 +16,10 @@ const GroupMemberCard = props => {
                 <div>{member.title}</div>
                 <CompleteTaskButton onClick={e => props.toggleHandler(member)} isCompleted={member.is_completed == 1 ? true : false} />
             </div>
-            <div>
+            {member.description && 
+            <div className={styles.memberCardDescriptionRow}>
                 {member.description}
-            </div>
+            </div>}
         </div>
     );
 }

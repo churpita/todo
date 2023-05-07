@@ -1,7 +1,6 @@
 # To-Do Web Application
 A simple CRUD web application to assist in managing and grouping to-do tasks.
 
-Prototype design (client work in progress):
 ![Prototype application design](prototype_image.png)
 
 # Planned Feature Backlog
@@ -10,6 +9,7 @@ Prototype design (client work in progress):
 - Deadlines/desktop reminders for tasks
 - Delete tasks
 ### General
+- Switch task reducer to utilize redux
 - Re-ordering for tasks and task groups
 - Real time updates
 - User authentication system
