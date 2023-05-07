@@ -7,9 +7,21 @@
 }
 
 .fade {
-    transition: ease-in-out .125s;
+    transition: opacity ease-in-out .125s;
 }
 
 .buttonContainer svg {
     position: absolute;
+}
+
+.topButton {
+    z-index: 1;
+}
+
+.bottomButton {
+    opacity: 0;
+}
+
+.topButton:hover + .bottomButton {
+    opacity: 1;
 }

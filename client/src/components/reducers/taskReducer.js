@@ -3,7 +3,8 @@ exports.taskActions = {
     ADD_GROUP: "addgroup",
     UPDATE_GROUP: "updategroup",
     DELETE_GROUP: "deletegroup",
-    ADD_GROUP_MEMBER: "addgroupmember"
+    ADD_GROUP_MEMBER: "addgroupmember",
+    TOGGLE_GROUP_MEMBER: "togglegroupmember"
 }
 
 exports.taskReducer = (prev, action) => {
@@ -82,6 +83,26 @@ exports.taskReducer = (prev, action) => {
 
             // And finally, push the new content array to the new state of taskData
             return {statusMessage: prev.statusMessage, content: updatedContent};
+
+
+        // Payload: { task_group_key, task_key, sequence, title, description }
+        case this.taskActions.TOGGLE_GROUP_MEMBER:
+            const toggledGroupMember = {
+                task_group_key: action.payload.task_group_key,
+                task_key: action.payload.task_key,
+                sequence: action.payload.sequence,
+                title: action.payload.title,
+                description: action.payload.description,
+                is_completed: action.payload.is_completed == 1 ? 0 : 1 
+            }
+            return {
+                statusMessage: prev.statusMessage,
+                content: {
+                    groups: prev.content.groups,
+                    members: prev.content.members.map((member) => { return member.task_key == toggledGroupMember.task_key ? toggledGroupMember : member })
+                }
+            };
+
 
             
         default:

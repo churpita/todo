@@ -55,6 +55,16 @@ const GroupCard = props => {
         }
     }
 
+    const toggleTaskHandler = async (member) => {
+        
+        // Add fetch call here
+
+        props.taskDataDispatch({
+            type: taskActions.TOGGLE_GROUP_MEMBER,
+            payload: member
+        });
+    }
+
     const updateGroupHandler = async (action, title, color) => {
         if (action == 'Save') {
             const updateGroupApiResponse = await fetch(`${process.env.REACT_APP_API_URL}/update-group`, {
@@ -126,7 +136,7 @@ const GroupCard = props => {
             <div className={styles.cardGroupMembers}>
                 {members.map(member => {
                     return (
-                        <GroupMemberCard key={member.sequence} member={member} />
+                        <GroupMemberCard key={member.sequence} member={member} toggleHandler={toggleTaskHandler} />
                     );
                 })}
                 <ModalTaskGroupMember 
