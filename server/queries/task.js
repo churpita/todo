@@ -34,4 +34,10 @@ module.exports = class Task {
             )
         `, [newTaskMap.task_group_key, newTaskMap.task_key, newTaskMap.sequence]);
     }
+
+    static toggleTask(task_key) {
+        return db.execute(`
+            CALL toggle_task(?);
+        `,[task_key]);
+    }
 }

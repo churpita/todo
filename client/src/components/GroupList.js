@@ -83,8 +83,6 @@ const GroupList = props => {
         console.log('Data fetched');
     }, []);
 
-    console.log(taskData);
-
     return (
         <>
             {/* Display error message */}

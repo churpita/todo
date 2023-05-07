@@ -8,7 +8,6 @@ Prototype design (client work in progress):
 ### Tasks
 - Update task titles/descriptions
 - Deadlines/desktop reminders for tasks
-- Mark tasks as completed
 - Delete tasks
 ### General
 - Re-ordering for tasks and task groups

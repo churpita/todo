@@ -56,13 +56,25 @@ const GroupCard = props => {
     }
 
     const toggleTaskHandler = async (member) => {
-        
-        // Add fetch call here
-
-        props.taskDataDispatch({
-            type: taskActions.TOGGLE_GROUP_MEMBER,
-            payload: member
+        const toggleTaskApiResponse = await fetch(`${process.env.REACT_APP_API_URL}/toggle-task`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                task_key: member.task_key
+            })
         });
+
+        const toggleTaskApiJson = await toggleTaskApiResponse.json();
+
+        if (toggleTaskApiJson.statusMessage) throw new Error(toggleTaskApiJson.statusMessage);
+        else {
+            props.taskDataDispatch({
+                type: taskActions.TOGGLE_GROUP_MEMBER,
+                payload: member
+            });
+        }
     }
 
     const updateGroupHandler = async (action, title, color) => {

@@ -46,3 +46,30 @@ exports.addTask = async (req, res) => {
         });
     }
 }
+
+exports.toggleTask = async (req, res) => {
+    try {
+        const {task_key} = req.body;
+        
+        if (task_key == null) {
+            console.log({
+                task_key: task_key
+            });
+            throw new TypeError("Task key must be non-null and present for successful POST");
+        }
+
+        await Task.toggleTask(task_key);
+
+        res.status(200).json({
+            statusMessage: null,
+            content: null
+        })
+    }
+    catch (err) {
+        console.log(err);
+        res.status(500).json({
+            statusMessage: 'Sorry, an error has occurred',
+            content: null
+        });
+    }
+}

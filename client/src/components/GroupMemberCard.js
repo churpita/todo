@@ -10,8 +10,6 @@ const GroupMemberCard = props => {
         opacity: member.is_completed ? `25%` : null
     }
 
-    console.log(member);
-
     return (
         <div className={styles.memberCard} style={memberCardDynamicStyle} >
             <div className={styles.memberCardTitleRow}>
