@@ -1,3 +1,5 @@
+USE todo;
+
 DROP PROCEDURE IF EXISTS delete_task_group;
 DELIMITER //
 CREATE PROCEDURE delete_task_group(IN tgk int)

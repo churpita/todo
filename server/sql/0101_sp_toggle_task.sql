@@ -1,3 +1,5 @@
+USE todo;
+
 DROP PROCEDURE IF EXISTS toggle_task;
 DELIMITER //
 CREATE PROCEDURE toggle_task(IN tk int)
