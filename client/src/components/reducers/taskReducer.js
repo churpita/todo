@@ -4,6 +4,7 @@ exports.taskActions = {
     UPDATE_GROUP: "updategroup",
     DELETE_GROUP: "deletegroup",
     ADD_GROUP_MEMBER: "addgroupmember",
+    DELETE_GROUP_MEMBER: "deletegroupmember",
     TOGGLE_GROUP_MEMBER: "togglegroupmember"
 }
 
@@ -83,6 +84,18 @@ exports.taskReducer = (prev, action) => {
 
             // And finally, push the new content array to the new state of taskData
             return {statusMessage: prev.statusMessage, content: updatedContent};
+
+        
+        // Payload: { task_key }
+        case this.taskActions.DELETE_GROUP_MEMBER:
+            updatedMembers = prev.content.members.filter(member => member.task_key != action.payload.task_key);
+
+            updatedContent = {groups: prev.content.groups, members: updatedMembers};
+
+            return {
+                statusMessage: prev.statusMessage,
+                content: updatedContent
+            };    
 
 
         // Payload: { task_group_key, task_key, sequence, title, description }

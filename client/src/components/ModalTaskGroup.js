@@ -91,8 +91,8 @@ const ModalTaskGroup = props => {
 
             {
                 props.action === "add" &&
-                <IconButton>
-                    <MdAddCircleOutline size={"2em"} onClick={e => setVisible(true)} />
+                <IconButton style={{marginTop: "1rem"}}>
+                    <MdAddCircleOutline size={"2rem"} onClick={e => setVisible(true)} />
                 </IconButton>
             }
 

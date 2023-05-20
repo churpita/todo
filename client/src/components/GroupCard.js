@@ -55,6 +55,28 @@ const GroupCard = props => {
         }
     }
 
+    const deleteTaskHandler = async (member) => {
+        const deleteTaskApiResponse = await fetch(`${process.env.REACT_APP_API_URL}/delete-task`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                task_key: member.task_key
+            })
+        });
+
+        const deleteTaskApiJson = await deleteTaskApiResponse.json();
+
+        if (deleteTaskApiJson.statusMessage) throw new Error(deleteTaskApiJson.statusMessage);
+        else {
+            props.taskDataDispatch({
+                type: taskActions.DELETE_GROUP_MEMBER,
+                payload: member
+            });
+        }
+    }
+
     const toggleTaskHandler = async (member) => {
         const toggleTaskApiResponse = await fetch(`${process.env.REACT_APP_API_URL}/toggle-task`, {
             method: "POST",
@@ -148,7 +170,7 @@ const GroupCard = props => {
             <div className={styles.cardGroupMembers}>
                 {members.map(member => {
                     return (
-                        <GroupMemberCard key={member.sequence} member={member} toggleHandler={toggleTaskHandler} />
+                        <GroupMemberCard key={member.sequence} member={member} toggleHandler={toggleTaskHandler} deleteHandler={deleteTaskHandler} />
                     );
                 })}
                 <ModalTaskGroupMember 

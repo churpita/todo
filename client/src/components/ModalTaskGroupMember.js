@@ -71,7 +71,7 @@ const ModalTaskGroupMember = props => {
 
             {
                 props.action === "add" &&
-                <IconButton>
+                <IconButton marginTop="1rem" marginBottom="0">
                     <MdAdd size="2rem" onClick={e => setVisible(true)} />
                 </IconButton>
             }

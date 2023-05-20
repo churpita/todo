@@ -4,9 +4,17 @@ import styles from './IconButton.module.css';
 
 const IconButton = props => {
     return (
-        <span className={styles.icon}>
+        <div 
+            className={styles.icon} 
+            style={{
+                width: props.width, 
+                height: props.height, 
+                marginTop: props.marginTop, 
+                marginBottom: props.marginBottom
+            }}
+        >
             {props.children}
-        </span>
+        </div>
     );
 };
 

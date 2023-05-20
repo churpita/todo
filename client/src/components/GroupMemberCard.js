@@ -1,7 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
+
+import { MdDeleteOutline } from "react-icons/md";
 
 import styles from "./GroupMemberCard.module.css";
+
 import CompleteTaskButton from "./CompleteTaskButton";
+import IconButton from "./IconButton";
 
 const GroupMemberCard = props => {
     const member = props.member;
@@ -14,7 +18,12 @@ const GroupMemberCard = props => {
         <div className={styles.memberCard} style={memberCardDynamicStyle} >
             <div className={styles.memberCardTitleRow}>
                 <div>{member.title}</div>
-                <CompleteTaskButton onClick={e => props.toggleHandler(member)} isCompleted={member.is_completed == 1 ? true : false} />
+                <div className={styles.memberCardButtonGroup}>
+                    <CompleteTaskButton onClick={e => props.toggleHandler(member)} isCompleted={member.is_completed == 1 ? true : false} />
+                    <IconButton height="2rem" width="2rem">
+                        <MdDeleteOutline size={"2rem"} onClick={e => props.deleteHandler(member)} />
+                    </IconButton>
+                </div>
             </div>
             {member.description && 
             <div className={styles.memberCardDescriptionRow}>

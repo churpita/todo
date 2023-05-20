@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import { MdOutlineCircle, MdCheckCircleOutline } from "react-icons/md";
 
