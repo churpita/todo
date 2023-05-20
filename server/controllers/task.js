@@ -47,6 +47,33 @@ exports.addTask = async (req, res) => {
     }
 }
 
+exports.deleteTask = async (req, res) => {
+    try {
+        const {task_key} = req.body;
+        
+        if (task_key == null) {
+            console.log({
+                task_key: task_key
+            });
+            throw new TypeError("Task key must be non-null and present for successful DELETE");
+        }
+
+        await Task.deleteTask(task_key);
+
+        res.status(200).json({
+            statusMessage: null,
+            content: 'Successfully deleted task.'
+        })
+    }
+    catch (err) {
+        console.log(err);
+        res.status(500).json({
+            statusMessage: 'Sorry, an error has occurred',
+            content: null
+        });
+    }
+}
+
 exports.toggleTask = async (req, res) => {
     try {
         const {task_key} = req.body;
