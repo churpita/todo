@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useReducer } from "react";
 import { taskReducer, taskActions } from "./reducers/taskReducer";
 
-import GroupCard from "./GroupCard";
+import TaskGroupCard from "./TaskGroupCard";
 import ModalTaskGroup from "./ModalTaskGroup";
 import LoadingSpinner from "./LoadingSpinner";
 
-const GroupList = props => {
+const TaskGroupList = props => {
     console.log('Re-rendered group list');
     const [loading, setLoading] = useState(true);
     const [fetchErrorMessage, setFetchErrorMessage] = useState(null);
@@ -96,7 +96,7 @@ const GroupList = props => {
             <>
                 {taskData.content.groups.map(group => {
                     return (
-                        <GroupCard 
+                        <TaskGroupCard 
                             taskData={taskData}
                             taskDataDispatch={taskDataDispatch}
                             attributes={group} 
@@ -117,4 +117,4 @@ const GroupList = props => {
     );
 };
 
-export default GroupList;
+export default TaskGroupList;

@@ -4,9 +4,9 @@ import { MdAdd } from "react-icons/md";
 import Modal from "./Modal";
 import IconButton from "./IconButton";
 
-import styles from "./ModalTaskGroupMember.module.css";
+import styles from "./ModalTask.module.css";
 
-const ModalTaskGroupMember = props => {
+const ModalTask = props => {
     const [visible, setVisible] = useState(false);
     const [loading, setLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState(null);
@@ -79,4 +79,4 @@ const ModalTaskGroupMember = props => {
     );
 }
 
-export default ModalTaskGroupMember;
+export default ModalTask;

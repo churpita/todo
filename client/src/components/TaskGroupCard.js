@@ -1,13 +1,13 @@
 import React from "react";
 import { taskActions } from "./reducers/taskReducer";
 
-import GroupMemberCard from "./GroupMemberCard";
+import TaskCard from "./TaskCard";
 import ModalTaskGroup from "./ModalTaskGroup";
-import ModalTaskGroupMember from "./ModalTaskGroupMember";
+import ModalTask from "./ModalTask";
 
-import styles from "./GroupCard.module.css";
+import styles from "./TaskGroupCard.module.css";
 
-const GroupCard = props => {
+const TaskGroupCard = props => {
     const members = props.members;
 
     const titleStyle = {
@@ -170,10 +170,10 @@ const GroupCard = props => {
             <div className={styles.cardGroupMembers}>
                 {members.map(member => {
                     return (
-                        <GroupMemberCard key={member.sequence} member={member} toggleHandler={toggleTaskHandler} deleteHandler={deleteTaskHandler} />
+                        <TaskCard key={member.sequence} member={member} toggleHandler={toggleTaskHandler} deleteHandler={deleteTaskHandler} />
                     );
                 })}
-                <ModalTaskGroupMember 
+                <ModalTask 
                     action="add"
                     modalTitle="Add New Task"
                     handler={addTaskHandler}
@@ -183,4 +183,4 @@ const GroupCard = props => {
     );
 }
 
-export default GroupCard;
+export default TaskGroupCard;

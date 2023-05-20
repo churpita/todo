@@ -2,12 +2,12 @@ import React from "react";
 
 import { MdDeleteOutline } from "react-icons/md";
 
-import styles from "./GroupMemberCard.module.css";
+import styles from "./TaskCard.module.css";
 
 import CompleteTaskButton from "./CompleteTaskButton";
 import IconButton from "./IconButton";
 
-const GroupMemberCard = props => {
+const TaskCard = props => {
     const member = props.member;
 
     const memberCardDynamicStyle = {
@@ -33,4 +33,4 @@ const GroupMemberCard = props => {
     );
 }
 
-export default GroupMemberCard;
+export default TaskCard;

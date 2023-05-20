@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import Header from './Header';
-import GroupList from "./GroupList";
+import TaskGroupList from "./TaskGroupList";
 
 import './App.css';
 
@@ -22,7 +22,7 @@ const App = () => {
         <div className={`app-container ${theme}`}>
             <Header toggleTheme={themeToggler} />
             <div className="body">
-                <GroupList />
+                <TaskGroupList />
             </div>
         </div>
     );
