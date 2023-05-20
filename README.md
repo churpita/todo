@@ -7,13 +7,12 @@ A simple CRUD web application to assist in managing and grouping to-do tasks.
 ### Tasks
 - Update task titles/descriptions
 - Deadlines/desktop reminders for tasks
-- Delete tasks
 ### General
 - Switch task reducer to utilize Redux
 - Switch client to utilize TypeScript
 - Re-ordering for tasks and task groups
-- Real time updates
 - User authentication system
+    - Real time updates
 - Dockerize the Node server
 
 # Local Configuration
