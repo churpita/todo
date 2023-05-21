@@ -3,7 +3,7 @@ import { taskReducer, taskActions } from "./reducers/taskReducer";
 
 import TaskGroupCard from "./TaskGroupCard";
 import ModalTaskGroup from "./ModalTaskGroup";
-import LoadingSpinner from "./LoadingSpinner";
+import LoadingSpinner from "./LoadingSpinner.tsx";
 
 const TaskGroupList = props => {
     console.log('Re-rendered group list');

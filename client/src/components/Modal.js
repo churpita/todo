@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import styles from './Modal.module.css';
-import LoadingSpinner from "./LoadingSpinner";
+import LoadingSpinner from "./LoadingSpinner.tsx";
 
 const portalElement = document.getElementById('overlays');
 
