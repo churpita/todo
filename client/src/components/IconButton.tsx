@@ -2,7 +2,15 @@ import React from "react";
 
 import styles from "./IconButton.module.css";
 
-const IconButton = (props) => {
+type Props = {
+    children: React.ReactNode;
+    height: number;
+    marginTop: number;
+    marginBottom: number;
+    width: number;
+};
+
+export const IconButton = (props: Props) => {
     return (
         <div
             className={styles.icon}
