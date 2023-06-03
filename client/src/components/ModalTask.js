@@ -6,49 +6,55 @@ import IconButton from "./IconButton";
 
 import styles from "./ModalTask.module.css";
 
-const ModalTask = props => {
+const ModalTask = (props) => {
     const [visible, setVisible] = useState(false);
     const [loading, setLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState(null);
 
-    const closeHandler = e => {
+    const closeHandler = (e) => {
         setVisible(false);
         setLoading(false);
         setErrorMessage(null);
-    }
+    };
 
-    const submitHandler = async event => {
+    const submitHandler = async (event) => {
         event.preventDefault();
         setErrorMessage(null);
         setLoading(true);
         try {
             await props.handler(
-                event.target.taskTitle.value, 
+                event.target.taskTitle.value,
                 event.target.taskDescription.value
             );
             setLoading(false);
             setVisible(false);
-        }
-        catch (err) {
+        } catch (err) {
             // Vague error message for security purposes
             setLoading(false);
-            setErrorMessage('An error occurred.');
+            setErrorMessage("An error occurred.");
         }
-    }
+    };
 
     return (
         <>
-            {
-                visible &&
-                <Modal title={props.modalTitle} onClose={closeHandler} loadingState={loading}>
-                    <form className={styles.modalForm} onSubmit={submitHandler} autoComplete="off">
-                        <input 
-                            name="taskTitle" 
-                            type="text" 
-                            placeholder="Task Title" 
+            {visible && (
+                <Modal
+                    title={props.modalTitle}
+                    onClose={closeHandler}
+                    loadingState={loading}
+                >
+                    <form
+                        className={styles.modalForm}
+                        onSubmit={submitHandler}
+                        autoComplete="off"
+                    >
+                        <input
+                            name="taskTitle"
+                            type="text"
+                            placeholder="Task Title"
                         />
 
-                        <textarea 
+                        <textarea
                             name="taskDescription"
                             placeholder="Task Description"
                             rows={4}
@@ -57,11 +63,11 @@ const ModalTask = props => {
                         {errorMessage && !loading && <div>{errorMessage}</div>}
 
                         <div>
-                            <input type="submit" value="Save"/>
+                            <input type="submit" value="Save" />
                         </div>
                     </form>
                 </Modal>
-            }
+            )}
 
             {/* 
                 This modal is reused for both add and update, but triggered with different buttons.
@@ -69,14 +75,13 @@ const ModalTask = props => {
                 The main purpose: modal visibility state is handled within the component, and therefore reduces unnecessary refreshes of other components
             */}
 
-            {
-                props.action === "add" &&
+            {props.action === "add" && (
                 <IconButton marginTop="1rem" marginBottom="0">
-                    <MdAdd size="2rem" onClick={e => setVisible(true)} />
+                    <MdAdd size="2rem" onClick={(e) => setVisible(true)} />
                 </IconButton>
-            }
+            )}
         </>
     );
-}
+};
 
 export default ModalTask;

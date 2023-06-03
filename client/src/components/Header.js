@@ -4,9 +4,9 @@ import IconButton from "./IconButton";
 
 import { MdDarkMode } from "react-icons/md";
 
-import styles from './Header.module.css';
+import styles from "./Header.module.css";
 
-const Header = props => {
+const Header = (props) => {
     return (
         <header className={styles.header}>
             <IconButton>
@@ -14,6 +14,6 @@ const Header = props => {
             </IconButton>
         </header>
     );
-}
+};
 
 export default Header;

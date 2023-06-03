@@ -1,16 +1,16 @@
 import React from "react";
 
-import styles from './IconButton.module.css';
+import styles from "./IconButton.module.css";
 
-const IconButton = props => {
+const IconButton = (props) => {
     return (
-        <div 
-            className={styles.icon} 
+        <div
+            className={styles.icon}
             style={{
-                width: props.width, 
-                height: props.height, 
-                marginTop: props.marginTop, 
-                marginBottom: props.marginBottom
+                width: props.width,
+                height: props.height,
+                marginTop: props.marginTop,
+                marginBottom: props.marginBottom,
             }}
         >
             {props.children}

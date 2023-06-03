@@ -1,21 +1,21 @@
 import React from "react";
 
-import { TailSpin } from 'react-loader-spinner';
+import { TailSpin } from "react-loader-spinner";
 
 type Props = {
-    color: string,
-    height: number,
-    width: number
-}
+    color: string;
+    height: number;
+    width: number;
+};
 
-const LoadingSpinner = ({color, width, height}: Props) => {
+const LoadingSpinner = ({ color, width, height }: Props) => {
     return (
-        <TailSpin 
-            width={width} 
+        <TailSpin
+            width={width}
             height={height}
             color={color || "var(--theme-font-color)"}
         />
     );
-} 
+};
 
 export default LoadingSpinner;
