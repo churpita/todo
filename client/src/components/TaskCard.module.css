@@ -5,6 +5,10 @@
     border-radius: 1rem;
 }
 
+.memberCardTitle {
+    overflow-wrap: anywhere;
+}
+
 .memberCardTitleRow {
     display: flex;
     flex-direction: row;
@@ -19,4 +23,5 @@
 
 .memberCardDescriptionRow {
     margin-top: 1rem;
+    overflow-wrap: anywhere;
 }

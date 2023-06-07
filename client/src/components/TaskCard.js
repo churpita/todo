@@ -17,7 +17,7 @@ const TaskCard = (props) => {
     return (
         <div className={styles.memberCard} style={memberCardDynamicStyle}>
             <div className={styles.memberCardTitleRow}>
-                <div>{member.title}</div>
+                <div className={styles.memberCardTitle}>{member.title}</div>
                 <div className={styles.memberCardButtonGroup}>
                     <CompleteTaskButton
                         onClick={(e) => props.toggleHandler(member)}
