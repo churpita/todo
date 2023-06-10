@@ -24,17 +24,14 @@ A simple CRUD web application to assist in managing and grouping to-do tasks.
 -   Switch client to utilize TypeScript
 -   User authentication system
     -   Real time updates
--   Dockerize the Node server
 
 # Local Configuration
 
 To run this application on your local machine,
 
-1. Install Docker, and navigate within a CLI to **`server\`**. Run **`docker build -t todo:0.1 .`** to build the database docker image, and then **`docker run -d -p 3306:3306 todo:0.1`** to start the image on port 3306. This image's configuration is only for the sake of development, and should be reconsidered for any production deployment in the interest of security. Future updates will also include a combined MySQL and Node image to remove the next step.
+1. Install Docker, and navigate to **`server\`**. Run **`docker-compose up -d --build`** to build and run the server docker image. The configuration in place is only for the sake of development, and should be reconsidered for any production deployment in the interest of security. By default, the API will run on port 8080. This can be adjusted if necessary within **`server\app.js`**, **`server\docker-compose.yml`**, and **`server\Dockerfile`**. Any changes to the port must also be made within **`client\.env`**. This will be streamlined into .env files within future updates.
 
-2. At **`server\`**, run `npm install`, and then `npm start` to start the server. By default, the server will run on port 8080. This can be adjusted if necessary within **`server\app.js`** at the `app.listen(8080)` call. However, do note that any changes must also be made within **`client\.env`**
-
-3. At **`client\`**, run `npm install` and then `npm start` to start the application. Alternatively, `npm build` can be used to compile the React code.
+2. At **`client\`**, run `npm install` and then `npm start` to start the application. Alternatively, `npm build` can be used to compile the React code.
 
 # Tech Stack
 
@@ -42,3 +39,4 @@ To run this application on your local machine,
 -   Docker
 -   MySQL
 -   React.js
+-   TypeScript

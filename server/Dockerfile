@@ -1,10 +1,8 @@
-# docker build -t todo:0.1 .
-# docker run -d -p 3306:3306 todo:0.1
-
-FROM mysql:latest
-
-ENV MYSQL_ROOT_PASSWORD=password
-
-COPY sql /docker-entrypoint-initdb.d/
-
-EXPOSE 3036
+# This is used to build the API image
+FROM node:16.15.0
+WORKDIR /usr/code
+COPY package.json .
+RUN npm install
+COPY . .
+EXPOSE 8080
+CMD ["npm", "run", "start"]
