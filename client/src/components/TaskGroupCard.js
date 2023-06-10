@@ -10,6 +10,11 @@ import styles from "./TaskGroupCard.module.css";
 const TaskGroupCard = (props) => {
     const members = props.members;
 
+    const totalTasks = props.members.length;
+    const completedTasks = props.members.filter(
+        (member) => member.is_completed == 1
+    ).length;
+
     const titleStyle = {
         color: `#${props.attributes.color}`,
     };
@@ -192,12 +197,15 @@ const TaskGroupCard = (props) => {
                 <h1 className={styles.cardTitle} style={titleStyle}>
                     {props.attributes.title}
                 </h1>
-                <ModalTaskGroup
-                    action="update"
-                    attributes={props.attributes}
-                    modalTitle="Update Group"
-                    handler={updateGroupHandler}
-                />
+                <div className={styles.groupCardTitleRightSide}>
+                    <div>{`${completedTasks}/${totalTasks}`}</div>
+                    <ModalTaskGroup
+                        action="update"
+                        attributes={props.attributes}
+                        modalTitle="Update Group"
+                        handler={updateGroupHandler}
+                    />
+                </div>
             </div>
             <div className={styles.cardGroupMembers}>
                 {members.map((member) => {

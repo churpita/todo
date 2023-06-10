@@ -130,7 +130,7 @@ const ModalTaskGroup = (props) => {
             )}
 
             {props.action === "update" && (
-                <IconButton>
+                <IconButton height="2rem">
                     <MdEdit size="2rem" onClick={(e) => setVisible(true)} />
                 </IconButton>
             )}

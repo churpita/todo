@@ -18,13 +18,23 @@
     font-weight: bold;
 }
 
+.groupCardTitleRightSide {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.groupCardTitleRightSide div {
+    margin-left: 1rem;
+}
+
 .cardGroupMembers {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.cardGroupMembers > div {
+.cardGroupMembers>div {
     margin-bottom: 1rem;
 }
 

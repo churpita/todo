@@ -6,11 +6,6 @@ A simple CRUD web application to assist in managing and grouping to-do tasks.
 
 # Planned Feature Backlog
 
-### Task Groups
-
--   Delete task groups
--   Counter for amount of tasks completed out of the total
-
 ### Tasks
 
 -   Update task titles/descriptions
