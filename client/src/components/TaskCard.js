@@ -6,6 +6,7 @@ import styles from "./TaskCard.module.css";
 
 import CompleteTaskButton from "./CompleteTaskButton";
 import IconButton from "./IconButton";
+import ModalTask from "./ModalTask";
 
 const TaskCard = (props) => {
     const member = props.member;
@@ -19,6 +20,12 @@ const TaskCard = (props) => {
             <div className={styles.memberCardTitleRow}>
                 <div className={styles.memberCardTitle}>{member.title}</div>
                 <div className={styles.memberCardButtonGroup}>
+                    <ModalTask
+                        action="update"
+                        attributes={member}
+                        modalTitle="Update Task"
+                        handler={props.updateHandler}
+                    />
                     <CompleteTaskButton
                         onClick={(e) => props.toggleHandler(member)}
                         isCompleted={member.is_completed == 1 ? true : false}

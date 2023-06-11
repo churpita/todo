@@ -77,11 +77,44 @@ const TaskGroupCard = (props) => {
         }
     };
 
+    const updateTaskHandler = async (task_key, title, description) => {
+        const updateTaskApiResponse = await fetch(
+            `${process.env.REACT_APP_API_URL}/update-task`,
+            {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    task_key: task_key,
+                    title: title,
+                    description: description,
+                }),
+            }
+        );
+
+        const updateTaskApiJson = await updateTaskApiResponse.json();
+
+        if (updateTaskApiJson.statusMessage) {
+            throw new Error(updateTaskApiJson.statusMessage);
+        } else {
+            props.taskDataDispatch({
+                type: taskActions.UPDATE_GROUP_MEMBER,
+                payload: {
+                    task_key: updateTaskApiJson.content.updatedTask.task_key,
+                    title: updateTaskApiJson.content.updatedTask.title,
+                    description:
+                        updateTaskApiJson.content.updatedTask.description,
+                },
+            });
+        }
+    };
+
     const deleteTaskHandler = async (member) => {
         const deleteTaskApiResponse = await fetch(
             `${process.env.REACT_APP_API_URL}/delete-task`,
             {
-                method: "POST",
+                method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
                 },
@@ -214,6 +247,7 @@ const TaskGroupCard = (props) => {
                             key={member.sequence}
                             member={member}
                             toggleHandler={toggleTaskHandler}
+                            updateHandler={updateTaskHandler}
                             deleteHandler={deleteTaskHandler}
                         />
                     );

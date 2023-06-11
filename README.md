@@ -8,7 +8,7 @@ A simple CRUD web application to assist in managing and grouping to-do tasks.
 
 ### Tasks
 
--   Update task titles/descriptions
+-   Multi-line description support
 -   Deadlines/desktop reminders for tasks
 
 ### General

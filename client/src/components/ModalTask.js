@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { MdAdd } from "react-icons/md";
+import { MdAdd, MdEdit } from "react-icons/md";
 
 import Modal from "./Modal";
 import IconButton from "./IconButton";
@@ -22,10 +22,21 @@ const ModalTask = (props) => {
         setErrorMessage(null);
         setLoading(true);
         try {
-            await props.handler(
-                event.target.taskTitle.value,
-                event.target.taskDescription.value
-            );
+            switch (props.action) {
+                case "add":
+                    await props.handler(
+                        event.target.taskTitle.value,
+                        event.target.taskDescription.value
+                    );
+                    break;
+                case "update":
+                    await props.handler(
+                        props.attributes.task_key,
+                        event.target.taskTitle.value,
+                        event.target.taskDescription.value
+                    );
+                    break;
+            }
             setLoading(false);
             setVisible(false);
         } catch (err) {
@@ -52,12 +63,22 @@ const ModalTask = (props) => {
                             name="taskTitle"
                             type="text"
                             placeholder="Task Title"
+                            defaultValue={
+                                props.attributes && props.attributes.title
+                                    ? props.attributes.title
+                                    : undefined
+                            }
                         />
 
                         <textarea
                             name="taskDescription"
                             placeholder="Task Description"
                             rows={4}
+                            defaultValue={
+                                props.attributes && props.attributes.description
+                                    ? props.attributes.description
+                                    : undefined
+                            }
                         />
 
                         {errorMessage && !loading && <div>{errorMessage}</div>}
@@ -78,6 +99,12 @@ const ModalTask = (props) => {
             {props.action === "add" && (
                 <IconButton marginTop="1rem" marginBottom="0">
                     <MdAdd size="2rem" onClick={(e) => setVisible(true)} />
+                </IconButton>
+            )}
+
+            {props.action === "update" && (
+                <IconButton height="2rem">
+                    <MdEdit size="2rem" onClick={(e) => setVisible(true)} />
                 </IconButton>
             )}
         </>
