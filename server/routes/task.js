@@ -14,6 +14,6 @@ router.put("/update-task", taskController.updateTask);
 router.delete("/delete-task", taskController.deleteTask);
 
 // POST /toggle-task
-router.put("/toggle-task", taskController.toggleTask);
+router.post("/toggle-task", taskController.toggleTask);
 
 module.exports = router;
