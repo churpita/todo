@@ -13,7 +13,6 @@ A simple CRUD web application to assist in managing and grouping to-do tasks.
 
 ### General
 
--   Add error handling for input fields over max length
 -   Re-ordering for tasks and task groups
 -   Switch task reducer to utilize Redux
 -   Switch client to utilize TypeScript

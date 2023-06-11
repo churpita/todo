@@ -52,6 +52,7 @@ const ModalTaskGroup = (props) => {
                         <input
                             name="groupTitle"
                             type="text"
+                            maxLength={128}
                             placeholder="Group Name"
                             defaultValue={
                                 props.attributes && props.attributes.title

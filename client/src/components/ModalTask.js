@@ -62,6 +62,7 @@ const ModalTask = (props) => {
                         <input
                             name="taskTitle"
                             type="text"
+                            maxLength={128}
                             placeholder="Task Title"
                             defaultValue={
                                 props.attributes && props.attributes.title
@@ -72,6 +73,7 @@ const ModalTask = (props) => {
 
                         <textarea
                             name="taskDescription"
+                            maxLength={1024}
                             placeholder="Task Description"
                             rows={4}
                             defaultValue={
