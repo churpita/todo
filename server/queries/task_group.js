@@ -1,4 +1,4 @@
-const db = require('../util/database');
+const db = require("../util/database");
 
 module.exports = class TaskGroup {
     static fetchAllGroups() {
@@ -30,7 +30,8 @@ module.exports = class TaskGroup {
     }
 
     static addGroup(newGroup) {
-        return db.execute(`
+        return db.execute(
+            `
             INSERT INTO task_group
             (
                 task_group_key,
@@ -43,22 +44,34 @@ module.exports = class TaskGroup {
                 ?,
                 ?
             )
-        `, [newGroup.task_group_key, newGroup.title, newGroup.color]);
+        `,
+            [newGroup.task_group_key, newGroup.title, newGroup.color]
+        );
     }
 
     static updateGroup(updatedGroup) {
-        return db.execute(`
+        return db.execute(
+            `
             UPDATE task_group
             SET 
                 title=?,
                 color=?
             WHERE task_group_key = ?
-        `, [updatedGroup.title, updatedGroup.color, updatedGroup.task_group_key]);
+        `,
+            [
+                updatedGroup.title,
+                updatedGroup.color,
+                updatedGroup.task_group_key,
+            ]
+        );
     }
 
     static deleteGroup(task_group_key) {
-        return db.execute(`
+        return db.execute(
+            `
             CALL delete_task_group(?);
-        `,[task_group_key]);
+        `,
+            [task_group_key]
+        );
     }
-}
+};

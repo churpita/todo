@@ -1,16 +1,19 @@
-const express = require('express');
+const express = require("express");
 
-const taskController = require('../controllers/task');
+const taskController = require("../controllers/task");
 
 const router = express.Router();
 
 // POST /add-task
-router.post('/add-task', taskController.addTask);
+router.post("/add-task", taskController.addTask);
 
-// POST /delete-task
-router.post('/delete-task', taskController.deleteTask);
+// PUT /update-group
+router.put("/update-task", taskController.updateTask);
+
+// DELETE /delete-task
+router.delete("/delete-task", taskController.deleteTask);
 
 // POST /toggle-task
-router.post('/toggle-task', taskController.toggleTask);
+router.put("/toggle-task", taskController.toggleTask);
 
 module.exports = router;
