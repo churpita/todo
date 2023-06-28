@@ -5,7 +5,7 @@ import TaskGroupList from "./TaskGroupList";
 
 import "./App.css";
 
-const App = () => {
+export const App = () => {
     if (!localStorage.getItem("theme"))
         localStorage.setItem("theme", "app-theme-dark");
 

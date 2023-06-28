@@ -8,11 +8,20 @@ import CompleteTaskButton from "./CompleteTaskButton";
 import IconButton from "./IconButton";
 import ModalTask from "./ModalTask";
 
-const TaskCard = (props) => {
+import { Task } from "./types/Task";
+
+type Props = {
+    member: Task;
+    updateHandler: (member: Task) => {};
+    toggleHandler: (member: Task) => {};
+    deleteHandler: (member: Task) => {};
+};
+
+export const TaskCard = (props: Props) => {
     const member = props.member;
 
-    const memberCardDynamicStyle = {
-        opacity: member.is_completed ? `25%` : null,
+    const memberCardDynamicStyle: React.CSSProperties = {
+        opacity: member.is_completed == 1 ? `25%` : undefined,
     };
 
     return (

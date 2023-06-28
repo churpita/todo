@@ -4,10 +4,10 @@ import styles from "./IconButton.module.css";
 
 type Props = {
     children: React.ReactNode;
-    height: number;
-    marginTop?: number;
-    marginBottom?: number;
-    width: number;
+    height?: string;
+    marginTop?: string;
+    marginBottom?: string;
+    width?: string;
 };
 
 export const IconButton = (props: Props) => {

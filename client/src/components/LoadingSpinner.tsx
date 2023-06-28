@@ -3,12 +3,12 @@ import React from "react";
 import { TailSpin } from "react-loader-spinner";
 
 type Props = {
-    color: string;
-    height: number;
-    width: number;
+    color?: string;
+    height: string;
+    width: string;
 };
 
-const LoadingSpinner = ({ color, width, height }: Props) => {
+export const LoadingSpinner = ({ color, width, height }: Props) => {
     return (
         <TailSpin
             width={width}

@@ -6,7 +6,11 @@ import { MdDarkMode } from "react-icons/md";
 
 import styles from "./Header.module.css";
 
-const Header = (props) => {
+type Props = {
+    toggleTheme: React.MouseEventHandler;
+};
+
+export const Header = (props: Props) => {
     return (
         <header className={styles.header}>
             <IconButton>

@@ -5,9 +5,20 @@ import TaskCard from "./TaskCard";
 import ModalTaskGroup from "./ModalTaskGroup";
 import ModalTask from "./ModalTask";
 
+import { Group } from "./types/Group";
+import { Task } from "./types/Task";
+import { TaskState, TaskAction } from "./reducers/taskReducer";
+
 import styles from "./TaskGroupCard.module.css";
 
-const TaskGroupCard = (props) => {
+type Props = {
+    members: Task[];
+    attributes: Group;
+    taskData: TaskState;
+    taskDataDispatch: React.Dispatch<TaskAction>;
+};
+
+export const TaskGroupCard = (props: Props) => {
     const members = props.members;
 
     const totalTasks = props.members.length;
@@ -19,12 +30,12 @@ const TaskGroupCard = (props) => {
         color: `#${props.attributes.color}`,
     };
 
-    const addTaskHandler = async (title, description) => {
+    const addTaskHandler = async (member: Task) => {
         // If adding a first task/first task to a new group, -Infinity is the result of the Math.max query, so we want the sequence/key to be reset to 1 in those situations
         let newTaskKey =
             Math.max.apply(
                 Math,
-                props.taskData.content.members.map((member) => member.task_key)
+                props.taskData.content.members.map((member) => member.task_key!)
             ) + 1;
         if (Math.abs(newTaskKey) == Infinity) newTaskKey = 1;
 
@@ -37,7 +48,7 @@ const TaskGroupCard = (props) => {
                             member.task_group_key ==
                             props.attributes.task_group_key
                     )
-                    .map((member) => member.sequence)
+                    .map((member) => member.sequence!)
             ) + 1;
         if (Math.abs(newTaskSeq) == Infinity) newTaskSeq = 1;
 
@@ -52,8 +63,8 @@ const TaskGroupCard = (props) => {
                     task_group_key: props.attributes.task_group_key,
                     task_key: newTaskKey,
                     sequence: newTaskSeq,
-                    title: title,
-                    description: description,
+                    title: member.title,
+                    description: member.description,
                 }),
             }
         );
@@ -77,7 +88,7 @@ const TaskGroupCard = (props) => {
         }
     };
 
-    const updateTaskHandler = async (task_key, title, description) => {
+    const updateTaskHandler = async (member: Task) => {
         const updateTaskApiResponse = await fetch(
             `${process.env.REACT_APP_API_URL}/update-task`,
             {
@@ -86,9 +97,9 @@ const TaskGroupCard = (props) => {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    task_key: task_key,
-                    title: title,
-                    description: description,
+                    task_key: member.task_key,
+                    title: member.title,
+                    description: member.description,
                 }),
             }
         );
@@ -110,7 +121,7 @@ const TaskGroupCard = (props) => {
         }
     };
 
-    const deleteTaskHandler = async (member) => {
+    const deleteTaskHandler = async (member: Task) => {
         const deleteTaskApiResponse = await fetch(
             `${process.env.REACT_APP_API_URL}/delete-task`,
             {
@@ -136,7 +147,7 @@ const TaskGroupCard = (props) => {
         }
     };
 
-    const toggleTaskHandler = async (member) => {
+    const toggleTaskHandler = async (member: Task) => {
         const toggleTaskApiResponse = await fetch(
             `${process.env.REACT_APP_API_URL}/toggle-task`,
             {
@@ -162,8 +173,8 @@ const TaskGroupCard = (props) => {
         }
     };
 
-    const updateGroupHandler = async (action, title, color) => {
-        if (action == "Save") {
+    const updateGroupHandler = async (group: Group) => {
+        if (group.action == "Save") {
             const updateGroupApiResponse = await fetch(
                 `${process.env.REACT_APP_API_URL}/update-group`,
                 {
@@ -173,8 +184,8 @@ const TaskGroupCard = (props) => {
                     },
                     body: JSON.stringify({
                         task_group_key: props.attributes.task_group_key,
-                        title: title,
-                        color: color,
+                        title: group.title,
+                        color: group.color,
                     }),
                 }
             );
@@ -195,7 +206,7 @@ const TaskGroupCard = (props) => {
                     },
                 });
             }
-        } else if (action == "Delete") {
+        } else if (group.action == "Delete") {
             const deleteGroupApiResponse = await fetch(
                 `${process.env.REACT_APP_API_URL}/delete-group`,
                 {

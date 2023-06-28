@@ -1,4 +1,31 @@
-exports.taskActions = {
+import { Group } from "../types/Group";
+import { Task } from "../types/Task";
+
+export type TaskState = {
+    statusMessage?: string;
+    content: {
+        groups: Group[];
+        members: Task[];
+    };
+};
+
+export type TaskAction = {
+    type: string;
+    payload: TaskPayload;
+};
+
+export type TaskPayload = {
+    task_group_key?: number;
+    task_key?: number;
+    title?: string;
+    color?: string;
+    sequence?: number;
+    description?: string;
+    is_completed?: number;
+    fetchedTaskData?: TaskState;
+};
+
+export const taskActions = {
     FETCH_GROUPS: "fetchgroups",
     ADD_GROUP: "addgroup",
     UPDATE_GROUP: "updategroup",
@@ -9,17 +36,21 @@ exports.taskActions = {
     TOGGLE_GROUP_MEMBER: "togglegroupmember",
 };
 
-exports.taskReducer = (prev, action) => {
+export const taskReducer = (prev: TaskState, action: TaskAction): TaskState => {
     var updatedGroups;
     var updatedMembers;
     var updatedContent;
     switch (action.type) {
         // Payload: { fetchedTaskData }
-        case this.taskActions.FETCH_GROUPS:
-            return action.payload.fetchedTaskData;
+        case taskActions.FETCH_GROUPS:
+            if (action.payload.fetchedTaskData) {
+                return action.payload.fetchedTaskData;
+            } else {
+                return prev;
+            }
 
         // Payload: { task_group_key, title, color }
-        case this.taskActions.ADD_GROUP:
+        case taskActions.ADD_GROUP:
             const newTaskGroup = {
                 task_group_key: action.payload.task_group_key,
                 title: action.payload.title,
@@ -42,7 +73,7 @@ exports.taskReducer = (prev, action) => {
             };
 
         // Payload: { task_group_key, title, color }
-        case this.taskActions.UPDATE_GROUP:
+        case taskActions.UPDATE_GROUP:
             const updatedTaskGroup = {
                 task_group_key: action.payload.task_group_key,
                 title: action.payload.title,
@@ -63,7 +94,7 @@ exports.taskReducer = (prev, action) => {
             };
 
         // Payload: { task_group_key }
-        case this.taskActions.DELETE_GROUP:
+        case taskActions.DELETE_GROUP:
             updatedGroups = prev.content.groups.filter(
                 (group) => group.task_group_key != action.payload.task_group_key
             );
@@ -80,7 +111,7 @@ exports.taskReducer = (prev, action) => {
             };
 
         // Payload: { task_group_key, task_key, sequence, title, description }
-        case this.taskActions.ADD_GROUP_MEMBER:
+        case taskActions.ADD_GROUP_MEMBER:
             const newTask = {
                 task_group_key: action.payload.task_group_key,
                 task_key: action.payload.task_key,
@@ -105,7 +136,7 @@ exports.taskReducer = (prev, action) => {
             };
 
         // Payload: { task_group_key, task_key, sequence, title, description }
-        case this.taskActions.UPDATE_GROUP_MEMBER:
+        case taskActions.UPDATE_GROUP_MEMBER:
             const updatedTask = {
                 task_key: action.payload.task_key,
                 title: action.payload.title,
@@ -148,7 +179,7 @@ exports.taskReducer = (prev, action) => {
             };
 
         // Payload: { task_key }
-        case this.taskActions.DELETE_GROUP_MEMBER:
+        case taskActions.DELETE_GROUP_MEMBER:
             updatedMembers = prev.content.members.filter(
                 (member) => member.task_key != action.payload.task_key
             );
@@ -164,14 +195,14 @@ exports.taskReducer = (prev, action) => {
             };
 
         // Payload: { task_group_key, task_key, sequence, title, description }
-        case this.taskActions.TOGGLE_GROUP_MEMBER:
-            const toggledGroupMember = {
+        case taskActions.TOGGLE_GROUP_MEMBER:
+            const toggledGroupMember: Task = {
                 task_group_key: action.payload.task_group_key,
                 task_key: action.payload.task_key,
                 sequence: action.payload.sequence,
                 title: action.payload.title,
                 description: action.payload.description,
-                is_completed: action.payload.is_completed == 1 ? 0 : 1,
+                is_completed: action.payload.is_completed ? undefined : 1,
             };
             return {
                 statusMessage: prev.statusMessage,

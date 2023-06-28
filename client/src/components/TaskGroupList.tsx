@@ -1,29 +1,34 @@
 import React, { useState, useEffect, useReducer } from "react";
 import { taskReducer, taskActions } from "./reducers/taskReducer";
 
-import TaskGroupCard from "./TaskGroupCard";
-import ModalTaskGroup from "./ModalTaskGroup";
-import LoadingSpinner from "./LoadingSpinner.tsx";
+import { TaskGroupCard } from "./TaskGroupCard";
+import { ModalTaskGroup } from "./ModalTaskGroup";
+import { LoadingSpinner } from "./LoadingSpinner";
 
-const TaskGroupList = (props) => {
+import { Group } from "./types/Group";
+import { Task } from "./types/Task";
+
+export const TaskGroupList = () => {
     console.log("Re-rendered group list");
     const [loading, setLoading] = useState(true);
-    const [fetchErrorMessage, setFetchErrorMessage] = useState(null);
+    const [fetchErrorMessage, setFetchErrorMessage] = useState<string>();
 
     const [taskData, taskDataDispatch] = useReducer(taskReducer, {
-        statusMessage: null,
+        statusMessage: undefined,
         content: {
             groups: [],
             members: [],
         },
     });
 
-    const addGroupHandler = async (action, title, color) => {
+    const addGroupHandler = async (group: Group) => {
         // If adding a first group, -Infinity is the result of the Math.max query, so we want the key to be reset to 1 in that situation
         let newTaskGroupKey =
             Math.max.apply(
                 Math,
-                taskData.content.groups.map((group) => group.task_group_key)
+                taskData.content.groups.map(
+                    (group: Group) => group.task_group_key!
+                )
             ) + 1;
         if (Math.abs(newTaskGroupKey) == Infinity) newTaskGroupKey = 1;
 
@@ -36,8 +41,8 @@ const TaskGroupList = (props) => {
                 },
                 body: JSON.stringify({
                     task_group_key: newTaskGroupKey,
-                    title: title,
-                    color: color,
+                    title: group.title,
+                    color: group.color,
                 }),
             }
         );
@@ -45,7 +50,7 @@ const TaskGroupList = (props) => {
         const addGroupApiJson = await addGroupApiResponse.json();
 
         if (addGroupApiJson.statusMessage) {
-            throw new Error(taskDataApiJson.statusMessage);
+            throw new Error(addGroupApiJson.statusMessage);
         } else {
             taskDataDispatch({
                 type: taskActions.ADD_GROUP,
@@ -105,15 +110,16 @@ const TaskGroupList = (props) => {
             {/* Display group list after data has been fetched */}
             {!fetchErrorMessage && !loading && (
                 <>
-                    {taskData.content.groups.map((group) => {
+                    {taskData.content.groups.map((group: Group) => {
                         return (
                             <TaskGroupCard
                                 taskData={taskData}
                                 taskDataDispatch={taskDataDispatch}
                                 attributes={group}
                                 members={taskData.content.members.filter(
-                                    (m) =>
-                                        m.task_group_key == group.task_group_key
+                                    (member: Task) =>
+                                        member.task_group_key ==
+                                        group.task_group_key
                                 )}
                                 key={group.task_group_key}
                             />

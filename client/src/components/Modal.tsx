@@ -2,15 +2,29 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import styles from "./Modal.module.css";
-import LoadingSpinner from "./LoadingSpinner.tsx";
+import { LoadingSpinner } from "./LoadingSpinner";
 
-const portalElement = document.getElementById("overlays");
+type HelperProps = {
+    children?: React.ReactNode;
+    onClose?: React.MouseEventHandler;
+    modalTitle?: string;
+    loadingState?: boolean;
+};
 
-const Backdrop = (props) => {
+type ModalProps = {
+    children: React.ReactNode;
+    onClose: React.MouseEventHandler;
+    title: string;
+    loadingState?: boolean;
+};
+
+const portalElement = document.getElementById("overlays")!;
+
+const Backdrop = (props: HelperProps) => {
     return <div className={styles.backdrop} onClick={props.onClose} />;
 };
 
-const ModalOverlay = (props) => {
+const ModalOverlay = (props: HelperProps) => {
     return (
         <div className={styles.modal}>
             <div className={styles.modalTitleRow}>
@@ -24,7 +38,7 @@ const ModalOverlay = (props) => {
     );
 };
 
-const Modal = (props) => {
+export const Modal = (props: ModalProps) => {
     return (
         <React.Fragment>
             {ReactDOM.createPortal(

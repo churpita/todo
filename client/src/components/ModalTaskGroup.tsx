@@ -5,28 +5,43 @@ import Modal from "./Modal";
 import IconButton from "./IconButton";
 
 import styles from "./ModalTaskGroup.module.css";
+import { Group } from "./types/Group";
 
-const ModalTaskGroup = (props) => {
+type Props = {
+    action: string;
+    attributes?: Group;
+    modalTitle: string;
+    handler: (group: Group) => {};
+};
+
+interface FormElements extends HTMLFormElement {
+    taskTitle: HTMLInputElement;
+    taskDescription: HTMLInputElement;
+}
+
+export const ModalTaskGroup = (props: Props) => {
     const [visible, setVisible] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [errorMessage, setErrorMessage] = useState(null);
+    const [errorMessage, setErrorMessage] = useState<string>();
 
-    const closeHandler = (e) => {
+    const closeHandler = () => {
         setVisible(false);
         setLoading(false);
-        setErrorMessage(null);
+        setErrorMessage(undefined);
     };
 
-    const submitHandler = async (event) => {
+    const submitHandler = async (event: React.FormEvent) => {
         event.preventDefault();
-        setErrorMessage(null);
+        setErrorMessage(undefined);
         setLoading(true);
         try {
-            await props.handler(
-                event.target.submitValue, // declares whether an update or delete is being performed
-                event.target.groupTitle.value,
-                event.target.groupColor.value.substring(1)
-            );
+            await props.handler({
+                action: (event.target as FormElements).submitValue, // declares whether an update or delete is being performed
+                title: (event.target as FormElements).groupTitle.value,
+                color: (
+                    event.target as FormElements
+                ).groupColor.value.substring(1),
+            });
             setLoading(false);
             setVisible(false);
         } catch (err) {
@@ -81,8 +96,11 @@ const ModalTaskGroup = (props) => {
                                     type="submit"
                                     value="Add"
                                     onClick={(e) =>
-                                        (e.target.form.submitValue =
-                                            e.target.value)
+                                        ((
+                                            e.target as FormElements
+                                        ).form.submitValue = (
+                                            e.target as FormElements
+                                        ).value)
                                     }
                                     className={styles.goodSubmit}
                                 />
@@ -93,8 +111,11 @@ const ModalTaskGroup = (props) => {
                                     type="submit"
                                     value="Save"
                                     onClick={(e) =>
-                                        (e.target.form.submitValue =
-                                            e.target.value)
+                                        ((
+                                            e.target as FormElements
+                                        ).form.submitValue = (
+                                            e.target as FormElements
+                                        ).value)
                                     }
                                     className={styles.goodSubmit}
                                 />
@@ -104,8 +125,11 @@ const ModalTaskGroup = (props) => {
                                     type="submit"
                                     value="Delete"
                                     onClick={(e) =>
-                                        (e.target.form.submitValue =
-                                            e.target.value)
+                                        ((
+                                            e.target as FormElements
+                                        ).form.submitValue = (
+                                            e.target as FormElements
+                                        ).value)
                                     }
                                     className={styles.badSubmit}
                                 />
@@ -122,7 +146,7 @@ const ModalTaskGroup = (props) => {
             */}
 
             {props.action === "add" && (
-                <IconButton style={{ marginTop: "1rem" }}>
+                <IconButton marginTop="1rem">
                     <MdAddCircleOutline
                         size={"2rem"}
                         onClick={(e) => setVisible(true)}

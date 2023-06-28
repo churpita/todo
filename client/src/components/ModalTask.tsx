@@ -5,36 +5,52 @@ import Modal from "./Modal";
 import IconButton from "./IconButton";
 
 import styles from "./ModalTask.module.css";
+import { Task } from "./types/Task";
 
-const ModalTask = (props) => {
+type Props = {
+    action: string;
+    attributes?: Task;
+    modalTitle: string;
+    handler: (member: Task) => {};
+};
+
+interface FormElements extends HTMLFormElement {
+    taskTitle: HTMLInputElement;
+    taskDescription: HTMLInputElement;
+}
+
+export const ModalTask = (props: Props) => {
     const [visible, setVisible] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [errorMessage, setErrorMessage] = useState(null);
+    const [errorMessage, setErrorMessage] = useState<string>();
 
-    const closeHandler = (e) => {
+    const closeHandler = () => {
         setVisible(false);
         setLoading(false);
-        setErrorMessage(null);
+        setErrorMessage(undefined);
     };
 
-    const submitHandler = async (event) => {
+    const submitHandler = async (event: React.FormEvent) => {
         event.preventDefault();
-        setErrorMessage(null);
+        setErrorMessage(undefined);
         setLoading(true);
         try {
             switch (props.action) {
                 case "add":
-                    await props.handler(
-                        event.target.taskTitle.value,
-                        event.target.taskDescription.value
-                    );
+                    await props.handler({
+                        task_key: undefined,
+                        title: (event.target as FormElements).taskTitle.value,
+                        description: (event.target as FormElements)
+                            .taskDescription.value,
+                    });
                     break;
                 case "update":
-                    await props.handler(
-                        props.attributes.task_key,
-                        event.target.taskTitle.value,
-                        event.target.taskDescription.value
-                    );
+                    await props.handler({
+                        task_key: props.attributes!.task_key,
+                        title: (event.target as FormElements).taskTitle.value,
+                        description: (event.target as FormElements)
+                            .taskDescription.value,
+                    });
                     break;
             }
             setLoading(false);

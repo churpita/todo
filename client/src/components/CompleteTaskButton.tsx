@@ -4,7 +4,12 @@ import { MdOutlineCircle, MdCheckCircleOutline } from "react-icons/md";
 
 import styles from "./CompleteTaskButton.module.css";
 
-const CompleteTaskButton = (props) => {
+type Props = {
+    onClick: React.MouseEventHandler;
+    isCompleted?: boolean;
+};
+
+export const CompleteTaskButton = (props: Props) => {
     return (
         <div className={styles.buttonContainer} onClick={props.onClick}>
             {!props.isCompleted && (
