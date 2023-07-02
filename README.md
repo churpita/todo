@@ -6,17 +6,27 @@ A simple CRUD web application to assist in managing and grouping to-do tasks.
 
 # Planned Feature Backlog
 
+### Task Groups
+
+-   Allow re-ordering
+
 ### Tasks
 
+-   Allow re-ordering
 -   Multi-line description support
 -   Deadlines/desktop reminders for tasks
 
+### Users
+
+-   Add user tables
+-   Add user authentication
+-   Add necessary mapping tables to store permissions
+-   Allow multiple users to share task groups
+-   Ensure real time updates are provided to users working with shared task groups
+
 ### General
 
--   Re-ordering for tasks and task groups
 -   Switch task reducer to utilize Redux
--   User authentication system
-    -   Real time updates
 
 # Local Configuration
 
