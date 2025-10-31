@@ -1,11 +1,11 @@
-import styles from "./ModalBackdrop.module.css";
+import styles from './ModalBackdrop.module.css';
 
 interface IModalBackdropProps {
-  onClose?: React.MouseEventHandler;
+    onClose?: React.MouseEventHandler;
 }
 
 export const ModalBackdrop = (
-  props: IModalBackdropProps,
+    props: IModalBackdropProps
 ): React.ReactElement => {
-  return <div className={styles.backdrop} onClick={props.onClose} />;
+    return <div className={styles.backdrop} onClick={props.onClose} />;
 };

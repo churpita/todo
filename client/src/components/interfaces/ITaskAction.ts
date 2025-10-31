@@ -1,6 +1,6 @@
-import { ITaskPayload } from "./ITaskPayload";
+import { ITaskPayload } from './ITaskPayload';
 
 export interface ITaskAction {
-  type: string;
-  payload: ITaskPayload;
+    type: string;
+    payload: ITaskPayload;
 }

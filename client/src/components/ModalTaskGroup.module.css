@@ -1,82 +1,82 @@
 .modalForm {
-  width: 100%;
-  display: inline-flex;
-  flex-direction: column;
-  align-items: baseline;
+    width: 100%;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: baseline;
 }
 
 .modalForm input {
-  font-family: inherit;
+    font-family: inherit;
 }
 
-.modalForm input:not([type="submit"]) {
-  margin-bottom: 1rem;
+.modalForm input:not([type='submit']) {
+    margin-bottom: 1rem;
 }
 
 /* Text Field */
 
-.modalForm input[type="text"] {
-  padding: 1rem;
-  border: none;
-  border-radius: 0.5rem;
+.modalForm input[type='text'] {
+    padding: 1rem;
+    border: none;
+    border-radius: 0.5rem;
 }
 
 /* Submit Buttons */
 
 .submitRow {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
-.modalForm input[type="submit"] {
-  padding: 0.5rem 1rem;
-  border: none;
-  border-radius: 0.5rem;
-  color: white;
-  cursor: pointer;
-  transition: 0.25s;
+.modalForm input[type='submit'] {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    color: white;
+    cursor: pointer;
+    transition: 0.25s;
 }
 
 .goodSubmit {
-  background-color: rgb(36, 101, 112);
+    background-color: rgb(36, 101, 112);
 }
 
 .goodSubmit:hover {
-  background-color: rgb(67, 153, 168);
+    background-color: rgb(67, 153, 168);
 }
 
 .badSubmit {
-  background-color: rgb(112, 36, 36);
+    background-color: rgb(112, 36, 36);
 }
 
 .badSubmit:hover {
-  background-color: rgb(168, 67, 67);
+    background-color: rgb(168, 67, 67);
 }
 
 /* Color Picker */
 
-.modalForm input[type="color"] {
-  width: 2rem;
-  height: 2rem;
-  border-radius: 50%;
-  overflow: hidden;
-  outline: 0.125rem solid white;
+.modalForm input[type='color'] {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    overflow: hidden;
+    outline: 0.125rem solid white;
 }
 
-.modalForm input[type="color"]:hover {
-  cursor: pointer;
+.modalForm input[type='color']:hover {
+    cursor: pointer;
 }
 
-.modalForm input[type="color"]::-webkit-color-swatch {
-  border: none;
-  border-radius: 50%;
-  padding: 0;
+.modalForm input[type='color']::-webkit-color-swatch {
+    border: none;
+    border-radius: 50%;
+    padding: 0;
 }
 
-.modalForm input[type="color"]::-webkit-color-swatch-wrapper {
-  border: none;
-  border-radius: 50%;
-  padding: 0;
+.modalForm input[type='color']::-webkit-color-swatch-wrapper {
+    border: none;
+    border-radius: 50%;
+    padding: 0;
 }
