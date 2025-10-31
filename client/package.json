@@ -1,41 +1,29 @@
 {
-  "name": "todo-client",
-  "private": true,
-  "version": "1.1.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "preview": "vite preview --port 8080",
-    "build": "tsc -b && vite build",
-    "refresh-deps": "npx rimraf ./node_modules && npm install"
-  },
-  "author": "Anthony Churpita",
-  "devDependencies": {
-    "@babel/core": "7.28.5",
-    "@babel/preset-env": "7.28.5",
-    "@babel/preset-react": "7.28.5",
-    "@types/jest": "30.0.0",
-    "@types/node": "24.9.2",
-    "@types/react": "19.2.2",
-    "@types/react-dom": "19.2.2",
-    "@vitejs/plugin-react": "5.1.0",
-    "babel-loader": "10.0.0",
-    "css-loader": "7.1.2",
-    "dotenv-webpack": "8.1.1",
-    "html-webpack-plugin": "5.6.4",
-    "prettier": "3.6.2",
-    "react": "19.2.0",
-    "react-dom": "19.2.0",
-    "react-icons": "5.5.0",
-    "react-loader-spinner": "8.0.0",
-    "react-router-dom": "7.9.5",
-    "style-loader": "4.0.0",
-    "ts-loader": "9.5.4",
-    "typescript": "5.9.3",
-    "typescript-plugin-css-modules": "5.2.0",
-    "vite": "7.1.12",
-    "webpack": "5.102.1",
-    "webpack-cli": "6.0.1",
-    "webpack-dev-server": "5.2.2"
-  }
+    "name": "todo-client",
+    "private": true,
+    "version": "1.1.0",
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "preview": "vite preview --port 8080",
+        "build": "tsc -b && vite build",
+        "refresh-deps": "npx rimraf ./node_modules && npm install"
+    },
+    "author": "Anthony Churpita",
+    "devDependencies": {
+        "@types/jest": "30.0.0",
+        "@types/node": "24.9.2",
+        "@types/react": "19.2.2",
+        "@types/react-dom": "19.2.2",
+        "@vitejs/plugin-react": "5.1.0",
+        "prettier": "3.6.2",
+        "react": "19.2.0",
+        "react-dom": "19.2.0",
+        "react-icons": "5.5.0",
+        "react-loader-spinner": "8.0.0",
+        "react-router-dom": "7.9.5",
+        "typescript": "5.9.3",
+        "typescript-plugin-css-modules": "5.2.0",
+        "vite": "7.1.12"
+    }
 }
