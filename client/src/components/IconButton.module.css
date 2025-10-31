@@ -1,9 +1,9 @@
 .icon {
-    user-select: none;
+  user-select: none;
 }
 
 .icon:hover {
-    cursor: pointer;
-    color: gray;
-    transition: ease-in-out .125s;
+  cursor: pointer;
+  color: gray;
+  transition: ease-in-out 0.125s;
 }

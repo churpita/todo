@@ -1,30 +1,30 @@
 .app-container {
-    min-height: 100vh;
-    padding: 2rem;
-    overflow: auto;
-    background: var(--theme-page-background);
-    color: var(--theme-font-color);
+  min-height: 100vh;
+  padding: 2rem;
+  overflow: auto;
+  background: var(--theme-page-background);
+  color: var(--theme-font-color);
 }
 
 .app-theme-dark {
-    --theme-page-background: #222;
-    --theme-card-background: #1a1a1a;
-    --theme-card-alt-background: #1e1e1e;
-    --theme-font-color: white;
+  --theme-page-background: #222;
+  --theme-card-background: #1a1a1a;
+  --theme-card-alt-background: #1e1e1e;
+  --theme-font-color: white;
 }
 
 .app-theme-light {
-    --theme-page-background: white;
-    --theme-card-background: #E8E8E8;
-    --theme-card-alt-background: #dbdbdb;
-    --theme-font-color: black;
+  --theme-page-background: white;
+  --theme-card-background: #e8e8e8;
+  --theme-card-alt-background: #dbdbdb;
+  --theme-font-color: black;
 }
 
 .body {
-    max-width: 1280px;
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  max-width: 1280px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

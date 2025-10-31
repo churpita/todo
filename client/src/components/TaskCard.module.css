@@ -1,27 +1,27 @@
 .memberCard {
-    background-color: var(--theme-card-alt-background);
-    width: 100%;
-    padding: 1em;
-    border-radius: 1rem;
+  background-color: var(--theme-card-alt-background);
+  width: 100%;
+  padding: 1em;
+  border-radius: 1rem;
 }
 
 .memberCardTitle {
-    overflow-wrap: anywhere;
+  overflow-wrap: anywhere;
 }
 
 .memberCardTitleRow {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    font-size: 1.5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 1.5rem;
 }
 
 .memberCardButtonGroup {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .memberCardDescriptionRow {
-    margin-top: 1rem;
-    overflow-wrap: anywhere;
+  margin-top: 1rem;
+  overflow-wrap: anywhere;
 }

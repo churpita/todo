@@ -1,27 +1,27 @@
 .buttonContainer {
-    position: relative;
-    height: 2rem;
-    width: 2rem;
-    cursor: pointer;
-    user-select: none;
+  position: relative;
+  height: 2rem;
+  width: 2rem;
+  cursor: pointer;
+  user-select: none;
 }
 
 .fade {
-    transition: opacity ease-in-out .125s;
+  transition: opacity ease-in-out 0.125s;
 }
 
 .buttonContainer svg {
-    position: absolute;
+  position: absolute;
 }
 
 .topButton {
-    z-index: 1;
+  z-index: 1;
 }
 
 .bottomButton {
-    opacity: 0;
+  opacity: 0;
 }
 
 .topButton:hover + .bottomButton {
-    opacity: 1;
+  opacity: 1;
 }
