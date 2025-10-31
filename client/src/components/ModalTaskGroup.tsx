@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { MdAddCircleOutline, MdEdit } from "react-icons/md";
 
-import Modal from "./Modal";
-import IconButton from "./IconButton";
+import { Modal } from "./Modal";
+import { IconButton } from "./IconButton";
 
 import styles from "./ModalTaskGroup.module.css";
 import { Group } from "./types/Group";
@@ -162,5 +162,3 @@ export const ModalTaskGroup = (props: Props) => {
         </>
     );
 };
-
-export default ModalTaskGroup;

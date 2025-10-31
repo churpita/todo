@@ -1,5 +1,3 @@
-import React from "react";
-
 import { TailSpin } from "react-loader-spinner";
 
 type Props = {
@@ -17,5 +15,3 @@ export const LoadingSpinner = ({ color, width, height }: Props) => {
         />
     );
 };
-
-export default LoadingSpinner;

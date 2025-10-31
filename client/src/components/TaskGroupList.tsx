@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer } from "react";
+import { useState, useEffect, useReducer } from "react";
 import { taskReducer, taskActions } from "./reducers/taskReducer";
 
 import { TaskGroupCard } from "./TaskGroupCard";
@@ -136,5 +136,3 @@ export const TaskGroupList = () => {
         </>
     );
 };
-
-export default TaskGroupList;

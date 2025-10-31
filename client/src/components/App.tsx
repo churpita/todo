@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
-import Header from "./Header";
-import TaskGroupList from "./TaskGroupList";
+import { Header } from "./Header";
+import { TaskGroupList } from "./TaskGroupList";
 
 import "./App.css";
 
@@ -31,5 +31,3 @@ export const App = () => {
         </div>
     );
 };
-
-export default App;

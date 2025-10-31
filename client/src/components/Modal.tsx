@@ -57,5 +57,3 @@ export const Modal = (props: ModalProps) => {
         </React.Fragment>
     );
 };
-
-export default Modal;

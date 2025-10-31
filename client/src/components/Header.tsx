@@ -1,6 +1,6 @@
 import React from "react";
 
-import IconButton from "./IconButton";
+import { IconButton } from "./IconButton";
 
 import { MdDarkMode } from "react-icons/md";
 
@@ -19,5 +19,3 @@ export const Header = (props: Props) => {
         </header>
     );
 };
-
-export default Header;

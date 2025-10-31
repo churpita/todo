@@ -4,9 +4,9 @@ import { MdDeleteOutline } from "react-icons/md";
 
 import styles from "./TaskCard.module.css";
 
-import CompleteTaskButton from "./CompleteTaskButton";
-import IconButton from "./IconButton";
-import ModalTask from "./ModalTask";
+import { CompleteTaskButton } from "./CompleteTaskButton";
+import { IconButton } from "./IconButton";
+import { ModalTask } from "./ModalTask";
 
 import { Task } from "./types/Task";
 
@@ -55,5 +55,3 @@ export const TaskCard = (props: Props) => {
         </div>
     );
 };
-
-export default TaskCard;

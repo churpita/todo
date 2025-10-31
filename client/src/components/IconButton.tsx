@@ -1,5 +1,3 @@
-import React from "react";
-
 import styles from "./IconButton.module.css";
 
 type Props = {
@@ -25,5 +23,3 @@ export const IconButton = (props: Props) => {
         </div>
     );
 };
-
-export default IconButton;

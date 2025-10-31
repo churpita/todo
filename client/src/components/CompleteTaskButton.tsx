@@ -29,5 +29,3 @@ export const CompleteTaskButton = (props: Props) => {
         </div>
     );
 };
-
-export default CompleteTaskButton;

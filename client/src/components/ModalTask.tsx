@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { MdAdd, MdEdit } from "react-icons/md";
 
-import Modal from "./Modal";
-import IconButton from "./IconButton";
+import { Modal } from "./Modal";
+import { IconButton } from "./IconButton";
 
 import styles from "./ModalTask.module.css";
 import { Task } from "./types/Task";
@@ -128,5 +128,3 @@ export const ModalTask = (props: Props) => {
         </>
     );
 };
-
-export default ModalTask;

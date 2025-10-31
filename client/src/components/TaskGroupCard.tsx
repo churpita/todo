@@ -1,9 +1,9 @@
 import React from "react";
 import { taskActions } from "./reducers/taskReducer";
 
-import TaskCard from "./TaskCard";
-import ModalTaskGroup from "./ModalTaskGroup";
-import ModalTask from "./ModalTask";
+import { TaskCard } from "./TaskCard";
+import { ModalTaskGroup } from "./ModalTaskGroup";
+import { ModalTask } from "./ModalTask";
 
 import { Group } from "./types/Group";
 import { Task } from "./types/Task";
@@ -272,5 +272,3 @@ export const TaskGroupCard = (props: Props) => {
         </div>
     );
 };
-
-export default TaskGroupCard;
