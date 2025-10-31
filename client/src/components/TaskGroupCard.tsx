@@ -53,7 +53,7 @@ export const TaskGroupCard = (props: Props) => {
         if (Math.abs(newTaskSeq) == Infinity) newTaskSeq = 1;
 
         const addTaskApiResponse = await fetch(
-            `${process.env.REACT_APP_API_URL}/add-task`,
+            `${import.meta.env.VITE_REACT_APP_API_URL}/add-task`,
             {
                 method: "POST",
                 headers: {
@@ -90,7 +90,7 @@ export const TaskGroupCard = (props: Props) => {
 
     const updateTaskHandler = async (member: Task) => {
         const updateTaskApiResponse = await fetch(
-            `${process.env.REACT_APP_API_URL}/update-task`,
+            `${import.meta.env.VITE_REACT_APP_API_URL}/update-task`,
             {
                 method: "PUT",
                 headers: {
@@ -123,7 +123,7 @@ export const TaskGroupCard = (props: Props) => {
 
     const deleteTaskHandler = async (member: Task) => {
         const deleteTaskApiResponse = await fetch(
-            `${process.env.REACT_APP_API_URL}/delete-task`,
+            `${import.meta.env.VITE_REACT_APP_API_URL}/delete-task`,
             {
                 method: "DELETE",
                 headers: {
@@ -149,7 +149,7 @@ export const TaskGroupCard = (props: Props) => {
 
     const toggleTaskHandler = async (member: Task) => {
         const toggleTaskApiResponse = await fetch(
-            `${process.env.REACT_APP_API_URL}/toggle-task`,
+            `${import.meta.env.VITE_REACT_APP_API_URL}/toggle-task`,
             {
                 method: "POST",
                 headers: {
@@ -176,7 +176,7 @@ export const TaskGroupCard = (props: Props) => {
     const updateGroupHandler = async (group: Group) => {
         if (group.action == "Save") {
             const updateGroupApiResponse = await fetch(
-                `${process.env.REACT_APP_API_URL}/update-group`,
+                `${import.meta.env.VITE_REACT_APP_API_URL}/update-group`,
                 {
                     method: "PUT",
                     headers: {
@@ -208,7 +208,7 @@ export const TaskGroupCard = (props: Props) => {
             }
         } else if (group.action == "Delete") {
             const deleteGroupApiResponse = await fetch(
-                `${process.env.REACT_APP_API_URL}/delete-group`,
+                `${import.meta.env.VITE_REACT_APP_API_URL}/delete-group`,
                 {
                     method: "DELETE",
                     headers: {

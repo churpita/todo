@@ -33,7 +33,7 @@ export const TaskGroupList = () => {
         if (Math.abs(newTaskGroupKey) == Infinity) newTaskGroupKey = 1;
 
         const addGroupApiResponse = await fetch(
-            `${process.env.REACT_APP_API_URL}/add-group`,
+            `${import.meta.env.VITE_REACT_APP_API_URL}/add-group`,
             {
                 method: "POST",
                 headers: {
@@ -68,7 +68,7 @@ export const TaskGroupList = () => {
         console.log("Fetching tasks from API");
         try {
             const taskDataApiResponse = await fetch(
-                `${process.env.REACT_APP_API_URL}/groups`
+                `${import.meta.env.VITE_REACT_APP_API_URL}/groups`
             );
             const taskDataApiJson = await taskDataApiResponse.json();
 
