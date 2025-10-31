@@ -1,14 +1,14 @@
 import React from 'react';
-import { taskActions } from './reducers/taskReducer';
+import { taskActions } from '../reducers/taskReducer';
 
 import { TaskCard } from './TaskCard';
 import { ModalTaskGroup } from './ModalTaskGroup';
 import { ModalTask } from './ModalTask';
 
-import { IGroup } from './interfaces/IGroup';
-import { ITask } from './interfaces/ITask';
-import { ITaskState } from './interfaces/ITaskState';
-import { ITaskAction } from './interfaces/ITaskAction';
+import { IGroup } from '../interfaces/IGroup';
+import { ITask } from '../interfaces/ITask';
+import { ITaskState } from '../interfaces/ITaskState';
+import { ITaskAction } from '../interfaces/ITaskAction';
 
 import styles from './TaskGroupCard.module.css';
 

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { MdAddCircleOutline, MdEdit } from 'react-icons/md';
 
-import { Modal } from './Modal';
+import { Modal } from './Modal/Modal';
 import { IconButton } from './IconButton';
-import { IGroup } from './interfaces/IGroup';
+import { IGroup } from '../interfaces/IGroup';
 
 import styles from './ModalTaskGroup.module.css';
 

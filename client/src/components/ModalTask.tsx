@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { MdAdd, MdEdit } from 'react-icons/md';
 
-import { Modal } from './Modal';
+import { Modal } from './Modal/Modal';
 import { IconButton } from './IconButton';
-import { ITask } from './interfaces/ITask';
+import { ITask } from '../interfaces/ITask';
 
 import styles from './ModalTask.module.css';
 

@@ -1,12 +1,12 @@
 import { useState, useEffect, useReducer } from 'react';
-import { taskReducer, taskActions } from './reducers/taskReducer';
+import { taskReducer, taskActions } from '../reducers/taskReducer';
 
 import { TaskGroupCard } from './TaskGroupCard';
 import { ModalTaskGroup } from './ModalTaskGroup';
 import { LoadingSpinner } from './LoadingSpinner';
 
-import { IGroup } from './interfaces/IGroup';
-import { ITask } from './interfaces/ITask';
+import { IGroup } from '../interfaces/IGroup';
+import { ITask } from '../interfaces/ITask';
 
 export const TaskGroupList = (): React.ReactElement => {
     console.log('Re-rendered group list');

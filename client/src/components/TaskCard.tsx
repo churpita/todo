@@ -7,7 +7,7 @@ import styles from './TaskCard.module.css';
 import { CompleteTaskButton } from './CompleteTaskButton';
 import { IconButton } from './IconButton';
 import { ModalTask } from './ModalTask';
-import { ITask } from './interfaces/ITask';
+import { ITask } from '../interfaces/ITask';
 
 type ITaskCardProps = {
     member: ITask;
