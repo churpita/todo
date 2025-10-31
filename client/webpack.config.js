@@ -1,12 +1,11 @@
-const path = require("path");
-const HTMLWebpackPlugin = require("html-webpack-plugin");
-const dotenv = require("dotenv-webpack");
+import { join, resolve } from "path";
+import HTMLWebpackPlugin from "html-webpack-plugin";
 
-module.exports = {
-    entry: "./src/index.js",
+export default {
+    entry: "./src/index.tsx",
 
     output: {
-        path: path.join(__dirname, "/dist"),
+        path: join(resolve(), "/dist"),
         filename: "bundle.js",
     },
 
@@ -14,21 +13,10 @@ module.exports = {
         new HTMLWebpackPlugin({
             template: "./src/index.html",
         }),
-        new dotenv(),
     ],
 
     module: {
         rules: [
-            {
-                test: /.js$/,
-                exclude: /node_modules/,
-                use: {
-                    loader: "babel-loader",
-                    options: {
-                        presets: ["@babel/preset-env", "@babel/preset-react"],
-                    },
-                },
-            },
             {
                 test: /\.tsx?$/,
                 exclude: /node_modules/,
@@ -36,12 +24,38 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                use: ["style-loader", "css-loader"],
+                use: [
+                    "style-loader",
+                    {
+                        loader: "css-loader",
+                        options: {
+                            modules: {
+                                namedExport: false
+                            }
+                        }
+                    }
+                ],
+                include: /\.module\.css$/
+            },
+            {
+                test: /\.css$/,
+                use: [
+                    "style-loader",
+                    "css-loader"
+                ],
+                exclude: /\.module\.css$/
+            },
+            {
+                test: /\.(jpe?g|png|gif|svg)$/i,
+                loader: "file-loader",
+                options: {
+                    name: "[name].[ext]",
+                },
             },
         ],
     },
 
     resolve: {
-        extensions: [".js", ".json", ".ts", ".tsx"],
+        extensions: [".js", ".json", ".ts", ".tsx", ".css"],
     },
 };
