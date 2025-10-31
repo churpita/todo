@@ -1,42 +1,22 @@
-import { Group } from "../types/Group";
-import { Task } from "../types/Task";
-
-export type TaskState = {
-    statusMessage?: string;
-    content: {
-        groups: Group[];
-        members: Task[];
-    };
-};
-
-export type TaskAction = {
-    type: string;
-    payload: TaskPayload;
-};
-
-export type TaskPayload = {
-    task_group_key?: number;
-    task_key?: number;
-    title?: string;
-    color?: string;
-    sequence?: number;
-    description?: string;
-    is_completed?: number;
-    fetchedTaskData?: TaskState;
-};
+import { ITask } from '../interfaces/ITask';
+import { ITaskAction } from '../interfaces/ITaskAction';
+import { ITaskState } from '../interfaces/ITaskState';
 
 export const taskActions = {
-    FETCH_GROUPS: "fetchgroups",
-    ADD_GROUP: "addgroup",
-    UPDATE_GROUP: "updategroup",
-    DELETE_GROUP: "deletegroup",
-    ADD_GROUP_MEMBER: "addgroupmember",
-    UPDATE_GROUP_MEMBER: "updategroupmember",
-    DELETE_GROUP_MEMBER: "deletegroupmember",
-    TOGGLE_GROUP_MEMBER: "togglegroupmember",
+    FETCH_GROUPS: 'fetchgroups',
+    ADD_GROUP: 'addgroup',
+    UPDATE_GROUP: 'updategroup',
+    DELETE_GROUP: 'deletegroup',
+    ADD_GROUP_MEMBER: 'addgroupmember',
+    UPDATE_GROUP_MEMBER: 'updategroupmember',
+    DELETE_GROUP_MEMBER: 'deletegroupmember',
+    TOGGLE_GROUP_MEMBER: 'togglegroupmember',
 };
 
-export const taskReducer = (prev: TaskState, action: TaskAction): TaskState => {
+export const taskReducer = (
+    prev: ITaskState,
+    action: ITaskAction
+): ITaskState => {
     var updatedGroups;
     var updatedMembers;
     var updatedContent;
@@ -196,7 +176,7 @@ export const taskReducer = (prev: TaskState, action: TaskAction): TaskState => {
 
         // Payload: { task_group_key, task_key, sequence, title, description }
         case taskActions.TOGGLE_GROUP_MEMBER:
-            const toggledGroupMember: Task = {
+            const toggledGroupMember: ITask = {
                 task_group_key: action.payload.task_group_key,
                 task_key: action.payload.task_key,
                 sequence: action.payload.sequence,

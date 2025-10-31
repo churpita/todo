@@ -1,23 +1,21 @@
-import React from "react";
+import React from 'react';
 
-import IconButton from "./IconButton";
+import { MdDarkMode } from 'react-icons/md';
 
-import { MdDarkMode } from "react-icons/md";
+import { IconButton } from './IconButton';
 
-import styles from "./Header.module.css";
+import styles from './Header.module.css';
 
-type Props = {
+interface IHeaderProps {
     toggleTheme: React.MouseEventHandler;
-};
+}
 
-export const Header = (props: Props) => {
+export const Header = (props: IHeaderProps): React.ReactElement => {
     return (
         <header className={styles.header}>
             <IconButton>
-                <MdDarkMode onClick={props.toggleTheme} size={"2em"} />
+                <MdDarkMode onClick={props.toggleTheme} size={'2em'} />
             </IconButton>
         </header>
     );
 };
-
-export default Header;

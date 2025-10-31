@@ -1,23 +1,22 @@
-import React from "react";
+import React from 'react';
 
-import { MdDeleteOutline } from "react-icons/md";
+import { MdDeleteOutline } from 'react-icons/md';
 
-import styles from "./TaskCard.module.css";
+import styles from './TaskCard.module.css';
 
-import CompleteTaskButton from "./CompleteTaskButton";
-import IconButton from "./IconButton";
-import ModalTask from "./ModalTask";
+import { CompleteTaskButton } from './CompleteTaskButton';
+import { IconButton } from './IconButton';
+import { ModalTask } from './ModalTask';
+import { ITask } from '../interfaces/ITask';
 
-import { Task } from "./types/Task";
-
-type Props = {
-    member: Task;
-    updateHandler: (member: Task) => {};
-    toggleHandler: (member: Task) => {};
-    deleteHandler: (member: Task) => {};
+type ITaskCardProps = {
+    member: ITask;
+    updateHandler: (member: ITask) => void;
+    toggleHandler: (member: ITask) => void;
+    deleteHandler: (member: ITask) => void;
 };
 
-export const TaskCard = (props: Props) => {
+export const TaskCard = (props: ITaskCardProps): React.ReactElement => {
     const member = props.member;
 
     const memberCardDynamicStyle: React.CSSProperties = {
@@ -36,13 +35,13 @@ export const TaskCard = (props: Props) => {
                         handler={props.updateHandler}
                     />
                     <CompleteTaskButton
-                        onClick={(e) => props.toggleHandler(member)}
+                        onClick={() => props.toggleHandler(member)}
                         isCompleted={member.is_completed == 1 ? true : false}
                     />
                     <IconButton height="2rem" width="2rem">
                         <MdDeleteOutline
-                            size={"2rem"}
-                            onClick={(e) => props.deleteHandler(member)}
+                            size={'2rem'}
+                            onClick={() => props.deleteHandler(member)}
                         />
                     </IconButton>
                 </div>
@@ -55,5 +54,3 @@ export const TaskCard = (props: Props) => {
         </div>
     );
 };
-
-export default TaskCard;

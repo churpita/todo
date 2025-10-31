@@ -1,25 +1,25 @@
-import React, { useState } from "react";
-import { MdAdd, MdEdit } from "react-icons/md";
+import React, { useState } from 'react';
+import { MdAdd, MdEdit } from 'react-icons/md';
 
-import Modal from "./Modal";
-import IconButton from "./IconButton";
+import { Modal } from './Modal/Modal';
+import { IconButton } from './IconButton';
+import { ITask } from '../interfaces/ITask';
 
-import styles from "./ModalTask.module.css";
-import { Task } from "./types/Task";
+import styles from './ModalTask.module.css';
 
-type Props = {
+interface IModalTaskProps {
     action: string;
-    attributes?: Task;
+    attributes?: ITask;
     modalTitle: string;
-    handler: (member: Task) => {};
-};
+    handler: (member: ITask) => void;
+}
 
 interface FormElements extends HTMLFormElement {
     taskTitle: HTMLInputElement;
     taskDescription: HTMLInputElement;
 }
 
-export const ModalTask = (props: Props) => {
+export const ModalTask = (props: IModalTaskProps): React.ReactElement => {
     const [visible, setVisible] = useState(false);
     const [loading, setLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState<string>();
@@ -36,7 +36,7 @@ export const ModalTask = (props: Props) => {
         setLoading(true);
         try {
             switch (props.action) {
-                case "add":
+                case 'add':
                     await props.handler({
                         task_key: undefined,
                         title: (event.target as FormElements).taskTitle.value,
@@ -44,7 +44,7 @@ export const ModalTask = (props: Props) => {
                             .taskDescription.value,
                     });
                     break;
-                case "update":
+                case 'update':
                     await props.handler({
                         task_key: props.attributes!.task_key,
                         title: (event.target as FormElements).taskTitle.value,
@@ -58,7 +58,7 @@ export const ModalTask = (props: Props) => {
         } catch (err) {
             // Vague error message for security purposes
             setLoading(false);
-            setErrorMessage("An error occurred.");
+            setErrorMessage('An error occurred.');
         }
     };
 
@@ -114,19 +114,17 @@ export const ModalTask = (props: Props) => {
                 The main purpose: modal visibility state is handled within the component, and therefore reduces unnecessary refreshes of other components
             */}
 
-            {props.action === "add" && (
+            {props.action === 'add' && (
                 <IconButton marginTop="1rem" marginBottom="0">
-                    <MdAdd size="2rem" onClick={(e) => setVisible(true)} />
+                    <MdAdd size="2rem" onClick={() => setVisible(true)} />
                 </IconButton>
             )}
 
-            {props.action === "update" && (
+            {props.action === 'update' && (
                 <IconButton height="2rem">
-                    <MdEdit size="2rem" onClick={(e) => setVisible(true)} />
+                    <MdEdit size="2rem" onClick={() => setVisible(true)} />
                 </IconButton>
             )}
         </>
     );
 };
-
-export default ModalTask;

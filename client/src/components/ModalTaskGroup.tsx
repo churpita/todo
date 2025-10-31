@@ -1,25 +1,27 @@
-import React, { useState } from "react";
-import { MdAddCircleOutline, MdEdit } from "react-icons/md";
+import React, { useState } from 'react';
+import { MdAddCircleOutline, MdEdit } from 'react-icons/md';
 
-import Modal from "./Modal";
-import IconButton from "./IconButton";
+import { Modal } from './Modal/Modal';
+import { IconButton } from './IconButton';
+import { IGroup } from '../interfaces/IGroup';
 
-import styles from "./ModalTaskGroup.module.css";
-import { Group } from "./types/Group";
+import styles from './ModalTaskGroup.module.css';
 
-type Props = {
+interface IModalTaskGroupProps {
     action: string;
-    attributes?: Group;
+    attributes?: IGroup;
     modalTitle: string;
-    handler: (group: Group) => {};
-};
+    handler: (group: IGroup) => {};
+}
 
 interface FormElements extends HTMLFormElement {
     taskTitle: HTMLInputElement;
     taskDescription: HTMLInputElement;
 }
 
-export const ModalTaskGroup = (props: Props) => {
+export const ModalTaskGroup = (
+    props: IModalTaskGroupProps
+): React.ReactElement => {
     const [visible, setVisible] = useState(false);
     const [loading, setLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState<string>();
@@ -47,7 +49,7 @@ export const ModalTaskGroup = (props: Props) => {
         } catch (err) {
             // Vague error message for security purposes
             setLoading(false);
-            setErrorMessage("An error occurred.");
+            setErrorMessage('An error occurred.');
         }
     };
 
@@ -84,14 +86,14 @@ export const ModalTaskGroup = (props: Props) => {
                                     ? props.attributes.color
                                     : ((Math.random() * 0xffffff) << 0)
                                           .toString(16)
-                                          .padStart(6, "0")
+                                          .padStart(6, '0')
                             }`}
                         />
 
                         {errorMessage && !loading && <div>{errorMessage}</div>}
 
                         <div className={styles.submitRow}>
-                            {props.action === "add" && (
+                            {props.action === 'add' && (
                                 <input
                                     type="submit"
                                     value="Add"
@@ -106,7 +108,7 @@ export const ModalTaskGroup = (props: Props) => {
                                 />
                             )}
 
-                            {props.action === "update" && (
+                            {props.action === 'update' && (
                                 <input
                                     type="submit"
                                     value="Save"
@@ -120,7 +122,7 @@ export const ModalTaskGroup = (props: Props) => {
                                     className={styles.goodSubmit}
                                 />
                             )}
-                            {props.action === "update" && (
+                            {props.action === 'update' && (
                                 <input
                                     type="submit"
                                     value="Delete"
@@ -145,22 +147,20 @@ export const ModalTaskGroup = (props: Props) => {
                 The main purpose: modal visibility state is handled within the component, and therefore reduces unnecessary refreshes of other components
             */}
 
-            {props.action === "add" && (
+            {props.action === 'add' && (
                 <IconButton marginTop="1rem">
                     <MdAddCircleOutline
-                        size={"2rem"}
-                        onClick={(e) => setVisible(true)}
+                        size={'2rem'}
+                        onClick={() => setVisible(true)}
                     />
                 </IconButton>
             )}
 
-            {props.action === "update" && (
+            {props.action === 'update' && (
                 <IconButton height="2rem">
-                    <MdEdit size="2rem" onClick={(e) => setVisible(true)} />
+                    <MdEdit size="2rem" onClick={() => setVisible(true)} />
                 </IconButton>
             )}
         </>
     );
 };
-
-export default ModalTaskGroup;

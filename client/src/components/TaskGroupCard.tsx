@@ -1,24 +1,27 @@
-import React from "react";
-import { taskActions } from "./reducers/taskReducer";
+import React from 'react';
+import { taskActions } from '../reducers/taskReducer';
 
-import TaskCard from "./TaskCard";
-import ModalTaskGroup from "./ModalTaskGroup";
-import ModalTask from "./ModalTask";
+import { TaskCard } from './TaskCard';
+import { ModalTaskGroup } from './ModalTaskGroup';
+import { ModalTask } from './ModalTask';
 
-import { Group } from "./types/Group";
-import { Task } from "./types/Task";
-import { TaskState, TaskAction } from "./reducers/taskReducer";
+import { IGroup } from '../interfaces/IGroup';
+import { ITask } from '../interfaces/ITask';
+import { ITaskState } from '../interfaces/ITaskState';
+import { ITaskAction } from '../interfaces/ITaskAction';
 
-import styles from "./TaskGroupCard.module.css";
+import styles from './TaskGroupCard.module.css';
 
-type Props = {
-    members: Task[];
-    attributes: Group;
-    taskData: TaskState;
-    taskDataDispatch: React.Dispatch<TaskAction>;
-};
+interface ITaskGroupCardProps {
+    members: ITask[];
+    attributes: IGroup;
+    taskData: ITaskState;
+    taskDataDispatch: React.Dispatch<ITaskAction>;
+}
 
-export const TaskGroupCard = (props: Props) => {
+export const TaskGroupCard = (
+    props: ITaskGroupCardProps
+): React.ReactElement => {
     const members = props.members;
 
     const totalTasks = props.members.length;
@@ -30,7 +33,7 @@ export const TaskGroupCard = (props: Props) => {
         color: `#${props.attributes.color}`,
     };
 
-    const addTaskHandler = async (member: Task) => {
+    const addTaskHandler = async (member: ITask) => {
         // If adding a first task/first task to a new group, -Infinity is the result of the Math.max query, so we want the sequence/key to be reset to 1 in those situations
         let newTaskKey =
             Math.max.apply(
@@ -53,11 +56,11 @@ export const TaskGroupCard = (props: Props) => {
         if (Math.abs(newTaskSeq) == Infinity) newTaskSeq = 1;
 
         const addTaskApiResponse = await fetch(
-            `${process.env.REACT_APP_API_URL}/add-task`,
+            `${import.meta.env.VITE_REACT_APP_API_URL}/add-task`,
             {
-                method: "POST",
+                method: 'POST',
                 headers: {
-                    "Content-Type": "application/json",
+                    'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
                     task_group_key: props.attributes.task_group_key,
@@ -88,13 +91,13 @@ export const TaskGroupCard = (props: Props) => {
         }
     };
 
-    const updateTaskHandler = async (member: Task) => {
+    const updateTaskHandler = async (member: ITask) => {
         const updateTaskApiResponse = await fetch(
-            `${process.env.REACT_APP_API_URL}/update-task`,
+            `${import.meta.env.VITE_REACT_APP_API_URL}/update-task`,
             {
-                method: "PUT",
+                method: 'PUT',
                 headers: {
-                    "Content-Type": "application/json",
+                    'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
                     task_key: member.task_key,
@@ -121,13 +124,13 @@ export const TaskGroupCard = (props: Props) => {
         }
     };
 
-    const deleteTaskHandler = async (member: Task) => {
+    const deleteTaskHandler = async (member: ITask) => {
         const deleteTaskApiResponse = await fetch(
-            `${process.env.REACT_APP_API_URL}/delete-task`,
+            `${import.meta.env.VITE_REACT_APP_API_URL}/delete-task`,
             {
-                method: "DELETE",
+                method: 'DELETE',
                 headers: {
-                    "Content-Type": "application/json",
+                    'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
                     task_key: member.task_key,
@@ -147,13 +150,13 @@ export const TaskGroupCard = (props: Props) => {
         }
     };
 
-    const toggleTaskHandler = async (member: Task) => {
+    const toggleTaskHandler = async (member: ITask) => {
         const toggleTaskApiResponse = await fetch(
-            `${process.env.REACT_APP_API_URL}/toggle-task`,
+            `${import.meta.env.VITE_REACT_APP_API_URL}/toggle-task`,
             {
-                method: "POST",
+                method: 'POST',
                 headers: {
-                    "Content-Type": "application/json",
+                    'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
                     task_key: member.task_key,
@@ -173,14 +176,14 @@ export const TaskGroupCard = (props: Props) => {
         }
     };
 
-    const updateGroupHandler = async (group: Group) => {
-        if (group.action == "Save") {
+    const updateGroupHandler = async (group: IGroup) => {
+        if (group.action == 'Save') {
             const updateGroupApiResponse = await fetch(
-                `${process.env.REACT_APP_API_URL}/update-group`,
+                `${import.meta.env.VITE_REACT_APP_API_URL}/update-group`,
                 {
-                    method: "PUT",
+                    method: 'PUT',
                     headers: {
-                        "Content-Type": "application/json",
+                        'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
                         task_group_key: props.attributes.task_group_key,
@@ -206,13 +209,13 @@ export const TaskGroupCard = (props: Props) => {
                     },
                 });
             }
-        } else if (group.action == "Delete") {
+        } else if (group.action == 'Delete') {
             const deleteGroupApiResponse = await fetch(
-                `${process.env.REACT_APP_API_URL}/delete-group`,
+                `${import.meta.env.VITE_REACT_APP_API_URL}/delete-group`,
                 {
-                    method: "DELETE",
+                    method: 'DELETE',
                     headers: {
-                        "Content-Type": "application/json",
+                        'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
                         task_group_key: props.attributes.task_group_key,
@@ -272,5 +275,3 @@ export const TaskGroupCard = (props: Props) => {
         </div>
     );
 };
-
-export default TaskGroupCard;

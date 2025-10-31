@@ -5,5 +5,5 @@
 .icon:hover {
     cursor: pointer;
     color: gray;
-    transition: ease-in-out .125s;
+    transition: ease-in-out 0.125s;
 }

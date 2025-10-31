@@ -5,17 +5,19 @@
     width: 100%;
 }
 
-.modalForm input, .modalForm textarea {
+.modalForm input,
+.modalForm textarea {
     font-family: inherit;
 }
 
-.modalForm input:not(:last-child), .modalForm textarea {
+.modalForm input:not(:last-child),
+.modalForm textarea {
     margin-bottom: 1rem;
 }
 
 /* Text Field */
 
-.modalForm input[type=text] {
+.modalForm input[type='text'] {
     padding: 1rem;
     border: none;
     border-radius: 0.5rem;
@@ -33,7 +35,7 @@
 
 /* Submit Button */
 
-.modalForm input[type=submit] {
+.modalForm input[type='submit'] {
     padding: 0.5rem 1rem;
     border: none;
     border-radius: 0.5rem;
@@ -43,6 +45,6 @@
     transition: 0.25s;
 }
 
-.modalForm input[type=submit]:hover {
+.modalForm input[type='submit']:hover {
     background-color: rgb(67, 153, 168);
 }

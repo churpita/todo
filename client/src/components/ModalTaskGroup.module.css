@@ -9,13 +9,13 @@
     font-family: inherit;
 }
 
-.modalForm input:not([type="submit"]) {
+.modalForm input:not([type='submit']) {
     margin-bottom: 1rem;
 }
 
 /* Text Field */
 
-.modalForm input[type=text] {
+.modalForm input[type='text'] {
     padding: 1rem;
     border: none;
     border-radius: 0.5rem;
@@ -30,7 +30,7 @@
     justify-content: space-between;
 }
 
-.modalForm input[type=submit] {
+.modalForm input[type='submit'] {
     padding: 0.5rem 1rem;
     border: none;
     border-radius: 0.5rem;
@@ -57,7 +57,7 @@
 
 /* Color Picker */
 
-.modalForm input[type=color] {
+.modalForm input[type='color'] {
     width: 2rem;
     height: 2rem;
     border-radius: 50%;
@@ -65,17 +65,17 @@
     outline: 0.125rem solid white;
 }
 
-.modalForm input[type=color]:hover {
+.modalForm input[type='color']:hover {
     cursor: pointer;
 }
 
-.modalForm input[type=color]::-webkit-color-swatch {
+.modalForm input[type='color']::-webkit-color-swatch {
     border: none;
     border-radius: 50%;
     padding: 0;
 }
 
-.modalForm input[type=color]::-webkit-color-swatch-wrapper {
+.modalForm input[type='color']::-webkit-color-swatch-wrapper {
     border: none;
     border-radius: 50%;
     padding: 0;

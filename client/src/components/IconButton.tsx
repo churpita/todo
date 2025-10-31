@@ -1,16 +1,14 @@
-import React from "react";
+import styles from './IconButton.module.css';
 
-import styles from "./IconButton.module.css";
-
-type Props = {
+interface IIconButtonProps {
     children: React.ReactNode;
     height?: string;
     marginTop?: string;
     marginBottom?: string;
     width?: string;
-};
+}
 
-export const IconButton = (props: Props) => {
+export const IconButton = (props: IIconButtonProps): React.ReactElement => {
     return (
         <div
             className={styles.icon}
@@ -25,5 +23,3 @@ export const IconButton = (props: Props) => {
         </div>
     );
 };
-
-export default IconButton;

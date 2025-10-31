@@ -7,7 +7,7 @@
 }
 
 .fade {
-    transition: opacity ease-in-out .125s;
+    transition: opacity ease-in-out 0.125s;
 }
 
 .buttonContainer svg {
