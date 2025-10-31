@@ -1,4 +1,4 @@
-import { LoadingSpinner } from './LoadingSpinner';
+import { LoadingSpinner } from '../LoadingSpinner';
 import styles from './ModalOverlay.module.css';
 
 interface IModalOverlayProps {
