@@ -4,24 +4,24 @@
     width: 2rem;
     cursor: pointer;
     user-select: none;
+
+    svg {
+        position: absolute;
+    }
 }
 
 .fade {
     transition: opacity ease-in-out 0.125s;
 }
 
-.buttonContainer svg {
-    position: absolute;
-}
-
 .topButton {
     z-index: 1;
+
+    &:hover + .bottomButton {
+        opacity: 1;
+    }
 }
 
 .bottomButton {
     opacity: 0;
-}
-
-.topButton:hover + .bottomButton {
-    opacity: 1;
 }

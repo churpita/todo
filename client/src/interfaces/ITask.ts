@@ -1,4 +1,5 @@
 export interface ITask {
+    action?: string;
     task_group_key?: number;
     task_key?: number;
     sequence?: number;

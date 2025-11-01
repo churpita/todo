@@ -8,7 +8,7 @@ import { IGroup } from '../interfaces/IGroup';
 import styles from './ModalTaskGroup.module.css';
 
 interface IModalTaskGroupProps {
-    action: string;
+    action: 'add' | 'update';
     attributes?: IGroup;
     modalTitle: string;
     handler: (group: IGroup) => {};
@@ -66,29 +66,31 @@ export const ModalTaskGroup = (
                         onSubmit={submitHandler}
                         autoComplete="off"
                     >
-                        <input
-                            name="groupTitle"
-                            type="text"
-                            maxLength={128}
-                            placeholder="Group Name"
-                            defaultValue={
-                                props.attributes && props.attributes.title
-                                    ? props.attributes.title
-                                    : undefined
-                            }
-                        />
+                        <div className={styles.inputsContainer}>
+                            <input
+                                name="groupTitle"
+                                type="text"
+                                maxLength={128}
+                                placeholder="Group Name"
+                                defaultValue={
+                                    props.attributes && props.attributes.title
+                                        ? props.attributes.title
+                                        : undefined
+                                }
+                            />
 
-                        <input
-                            name="groupColor"
-                            type="color"
-                            defaultValue={`#${
-                                props.attributes && props.attributes.color
-                                    ? props.attributes.color
-                                    : ((Math.random() * 0xffffff) << 0)
-                                          .toString(16)
-                                          .padStart(6, '0')
-                            }`}
-                        />
+                            <input
+                                name="groupColor"
+                                type="color"
+                                defaultValue={`#${
+                                    props.attributes && props.attributes.color
+                                        ? props.attributes.color
+                                        : ((Math.random() * 0xffffff) << 0)
+                                              .toString(16)
+                                              .padStart(6, '0')
+                                }`}
+                            />
+                        </div>
 
                         {errorMessage && !loading && <div>{errorMessage}</div>}
 
