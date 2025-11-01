@@ -17,7 +17,6 @@ To run this application on your local machine,
 ### Task Groups
 
 -   Allow re-ordering
--   Add close button
 -   Allow drag and drop movement on the modal
 
 ### Tasks

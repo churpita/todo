@@ -92,35 +92,62 @@ export const TaskGroupCard = (
     };
 
     const updateTaskHandler = async (member: ITask) => {
-        const updateTaskApiResponse = await fetch(
-            `${import.meta.env.VITE_REACT_APP_API_URL}/update-task`,
-            {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    task_key: member.task_key,
-                    title: member.title,
-                    description: member.description,
-                }),
+        if (member.action == 'Save') {
+            const updateTaskApiResponse = await fetch(
+                `${import.meta.env.VITE_REACT_APP_API_URL}/update-task`,
+                {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        task_key: member.task_key,
+                        title: member.title,
+                        description: member.description,
+                    }),
+                }
+            );
+
+            const updateTaskApiJson = await updateTaskApiResponse.json();
+
+            if (updateTaskApiJson.statusMessage) {
+                throw new Error(updateTaskApiJson.statusMessage);
+            } else {
+                props.taskDataDispatch({
+                    type: taskActions.UPDATE_GROUP_MEMBER,
+                    payload: {
+                        task_key:
+                            updateTaskApiJson.content.updatedTask.task_key,
+                        title: updateTaskApiJson.content.updatedTask.title,
+                        description:
+                            updateTaskApiJson.content.updatedTask.description,
+                    },
+                });
             }
-        );
+        } else if (member.action == 'Delete') {
+            const deleteTaskApiResponse = await fetch(
+                `${import.meta.env.VITE_REACT_APP_API_URL}/delete-task`,
+                {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        task_key: member.task_key,
+                    }),
+                }
+            );
 
-        const updateTaskApiJson = await updateTaskApiResponse.json();
+            const deleteTaskApiJson = await deleteTaskApiResponse.json();
 
-        if (updateTaskApiJson.statusMessage) {
-            throw new Error(updateTaskApiJson.statusMessage);
-        } else {
-            props.taskDataDispatch({
-                type: taskActions.UPDATE_GROUP_MEMBER,
-                payload: {
-                    task_key: updateTaskApiJson.content.updatedTask.task_key,
-                    title: updateTaskApiJson.content.updatedTask.title,
-                    description:
-                        updateTaskApiJson.content.updatedTask.description,
-                },
-            });
+            if (deleteTaskApiJson.statusMessage)
+                throw new Error(deleteTaskApiJson.statusMessage);
+            else {
+                props.taskDataDispatch({
+                    type: taskActions.DELETE_GROUP_MEMBER,
+                    payload: member,
+                });
+            }
         }
     };
 

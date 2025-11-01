@@ -24,6 +24,7 @@ export const Modal = (props: IModalProps): React.ReactElement => {
                 <ModalOverlay
                     loadingState={props.loadingState}
                     modalTitle={props.title}
+                    onClose={props.onClose}
                 >
                     {props.children}
                 </ModalOverlay>,

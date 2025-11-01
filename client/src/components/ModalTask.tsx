@@ -8,7 +8,7 @@ import { ITask } from '../interfaces/ITask';
 import styles from './ModalTask.module.css';
 
 interface IModalTaskProps {
-    action: string;
+    action: 'add' | 'update';
     attributes?: ITask;
     modalTitle: string;
     handler: (member: ITask) => void;
@@ -46,6 +46,7 @@ export const ModalTask = (props: IModalTaskProps): React.ReactElement => {
                     break;
                 case 'update':
                     await props.handler({
+                        action: (event.target as FormElements).submitValue, // declares whether an update or delete is being performed
                         task_key: props.attributes!.task_key,
                         title: (event.target as FormElements).taskTitle.value,
                         description: (event.target as FormElements)
@@ -101,8 +102,33 @@ export const ModalTask = (props: IModalTaskProps): React.ReactElement => {
 
                         {errorMessage && !loading && <div>{errorMessage}</div>}
 
-                        <div>
-                            <input type="submit" value="Save" />
+                        <div className={styles.submitRow}>
+                            <input
+                                className={styles.goodSubmit}
+                                type="submit"
+                                value="Save"
+                                onClick={(e) =>
+                                    ((
+                                        e.target as FormElements
+                                    ).form.submitValue = (
+                                        e.target as FormElements
+                                    ).value)
+                                }
+                            />
+                            {props.action === 'update' && (
+                                <input
+                                    className={styles.badSubmit}
+                                    type="submit"
+                                    value="Delete"
+                                    onClick={(e) => {
+                                        (
+                                            e.target as FormElements
+                                        ).form.submitValue = (
+                                            e.target as FormElements
+                                        ).value;
+                                    }}
+                                />
+                            )}
                         </div>
                     </form>
                 </Modal>

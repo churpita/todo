@@ -22,22 +22,13 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-}
-
-.groupCardTitleRightSide div {
     margin-left: 1rem;
+    gap: 1rem;
 }
 
 .cardGroupMembers {
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.cardGroupMembers > div {
-    margin-bottom: 1rem;
-}
-
-.cardGroupMembers span {
-    padding-top: 1rem;
+    gap: 1rem;
 }
