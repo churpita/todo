@@ -5,6 +5,8 @@ import { TaskGroupList } from './TaskGroupList';
 
 import './App.css';
 
+export const showDebug = import.meta.env.VITE_ENABLE_CONSOLE_DEBUG === "true";
+
 export const App = (): React.ReactElement => {
     if (!localStorage.getItem('theme'))
         localStorage.setItem('theme', 'app-theme-dark');

@@ -4,12 +4,13 @@ import { taskReducer, taskActions } from '../reducers/taskReducer';
 import { TaskGroupCard } from './TaskGroupCard';
 import { ModalTaskGroup } from './ModalTaskGroup';
 import { LoadingSpinner } from './LoadingSpinner';
+import { showDebug } from './App';
 
 import { IGroup } from '../interfaces/IGroup';
 import { ITask } from '../interfaces/ITask';
 
 export const TaskGroupList = (): React.ReactElement => {
-    console.log('Re-rendered group list');
+    if (showDebug) console.log('Re-rendered group list');
     const [loading, setLoading] = useState(true);
     const [fetchErrorMessage, setFetchErrorMessage] = useState<string>();
 
@@ -65,7 +66,8 @@ export const TaskGroupList = (): React.ReactElement => {
     };
 
     const fetchTaskData = async () => {
-        console.log('Fetching tasks from API');
+        if (showDebug) console.log('Fetching tasks from API');
+
         try {
             const taskDataApiResponse = await fetch(
                 `${import.meta.env.VITE_REACT_APP_API_URL}/groups`
@@ -94,7 +96,7 @@ export const TaskGroupList = (): React.ReactElement => {
 
     useEffect(() => {
         fetchTaskData();
-        console.log('Data fetched');
+        if (showDebug) console.log('Data fetched');
     }, []);
 
     return (
